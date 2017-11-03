@@ -3,6 +3,6 @@
 module.exports = [
   {
     type: 'plugin-configs',
-    id: '@cardstack/github-auth'
+    id: 'cardstack-auth0'
   }
 ];

@@ -1,5 +1,6 @@
 const Error = require('@cardstack/plugin-utils/error');
-const request = require('./lib/request');
+const request = require('request-promise');
+const jwt = require('jsonwebtoken');
 
 module.exports = class {
   static create(...args) {
@@ -8,67 +9,53 @@ module.exports = class {
   constructor(params) {
     this.clientId = params['client-id'];
     this.clientSecret = params['client-secret'];
-    this.defaultUserTemplate =  "{ \"data\": { \"id\": \"{{login}}\", \"type\": \"github-users\", \"attributes\": { \"name\": \"{{name}}\", \"email\":\"{{email}}\", \"avatar-url\":\"{{avatar_url}}\" }}}";
+    this.domain = params['domain'];
+    this.appUrl = params['app-url'];
+    this.scope = params['scope'];
+    this.toriiRemoteService = params['torii-remote-service'];
+    this.popup = params['popup'];
+
+    this.defaultUserTemplate =  "{ \"data\": { \"id\": \"{{sub}}\", \"type\": \"auth0-users\", \"attributes\": { \"name\": \"{{name}}\", \"email\":\"{{email}}\", \"avatar-url\":\"{{picture}}\" }}}";
   }
+
   async authenticate(payload /*, userSearcher */) {
     if (!payload.authorizationCode) {
       throw new Error("missing required field 'authorizationCode'", {
         status: 400
       });
     }
+    let response = await request({
+      method: "POST",
+      uri: `https://${this.domain}/oauth/token`,
+      body: {
+        "grant_type": "authorization_code",
+        "client_id": this.clientId,
+        "client_secret": this.clientSecret,
+        "code": payload.authorizationCode,
+        "redirect_uri": this.appUrl
+      },
+      json: true,
+      resolveWithFullResponse: true
+    });
 
-    let payloadToGitHub = {
-      client_id: this.clientId,
-      client_secret: this.clientSecret,
-      code: payload.authorizationCode
-    };
-    if (payload.state) {
-      payloadToGitHub.state = payload.state;
-    }
-
-    let data = JSON.stringify(payloadToGitHub);
-    let options = {
-      hostname: 'github.com',
-      port: 443,
-      path: '/login/oauth/access_token',
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Content-Length': Buffer.byteLength(data),
-        'Accept': 'application/json',
-        'User-Agent': '@cardstack/github-auth'
-      }
-    };
-
-    let { response, body: responseBody } = await request(options, data);
+    let { body } = response;
     if (response.statusCode !== 200) {
-      throw new Error(responseBody.error, {
-        status: response.statusCode
+      throw new Error(body.error, {
+        status: response.statusCode,
+        description: body.error_description
       });
     }
 
-    options = {
-      hostname: 'api.github.com',
-      port: 443,
-      path: '/user',
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'User-Agent': '@cardstack/github-auth',
-        Authorization: `token ${responseBody.access_token}`
-      }
-    };
-
-    let userResponse = await request(options);
-    if (userResponse.response.statusCode !== 200) {
-      throw new Error(responseBody.error, { status: response.statusCode });
-    }
-    return userResponse.body;
+    return jwt.decode(body.id_token);
   }
 
   exposeConfig() {
     return {
-      clientId: this.clientId
+      clientId: this.clientId,
+      domain: this.domain,
+      scope: this.scope,
+      toriiRemoteService: this.toriiRemoteService,
+      popup: this.popup
     };
   }
 

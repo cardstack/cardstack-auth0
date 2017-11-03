@@ -2,8 +2,8 @@
   {{#if session.isAuthenticated }}
     <button {{action session.logout}}>Logout {{session.user.name}}</button>
   {{else}}
-    {{#github-login as |login|}}
+    {{#auth0-login as |login|}}
       <button {{action login}}>Login</button>
-    {{/github-login}}
+    {{/auth0-login}}
   {{/if}}
 {{/cardstack-session}}

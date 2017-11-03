@@ -1,5 +1,5 @@
 const { isEqual } = require('lodash');
-const log = require('@cardstack/plugin-utils/logger')('github-auth/indexer');
+const log = require('@cardstack/plugin-utils/logger')('auth0-auth/indexer');
 
 module.exports = class Indexer {
 
@@ -12,7 +12,7 @@ module.exports = class Indexer {
       this.disabled = true;
     } else {
       if (dataSource.userTemplate){
-        log.warn("If you use a custom user-template on the github-auth data source, you should probably also set params.provideUserSchema=false and provide your own user model");
+        log.warn("If you use a custom user-template on the auth0-auth data source, you should probably also set params.provideUserSchema=false and provide your own user model");
       }
     }
   }
@@ -40,7 +40,7 @@ class Updater {
     return [
       {
         type: 'content-types',
-        id: 'github-users',
+        id: 'auth0-users',
         attributes: {
         },
         relationships: {

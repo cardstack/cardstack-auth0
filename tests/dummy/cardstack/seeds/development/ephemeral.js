@@ -36,7 +36,7 @@ function initialModels() {
         'client-id': process.env.AUTH0_CLIENT_ID,
         'client-secret': process.env.AUTH0_CLIENT_SECRET,
         'domain': process.env.AUTH0_DOMAIN,
-        'app-url': "http://localhost:4200", // This most be set to the URL of the application that made the initial token request
+        'app-url': process.env.AUTH0_APP_URL, // This most be set to the URL of the application that made the initial token request
         'scope': 'openid profile email',
         'popup': { height: 700, width: 500 },
         'api-client-id': process.env.AUTH0_API_CLIENT_ID,

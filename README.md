@@ -1,19 +1,19 @@
-# @cardstack/github-auth
+# cardstack-auth0
 
 This README outlines the details of collaborating on this Ember addon.
 
 ## Installation
-
-* `git clone <repository-url>` this repository
-* `cd @cardstack/github-auth`
-* `npm install`
-* `bower install`
+ `ember install cardstack-auth0`
 
 ## Running
 
-To run the demo app and interact with GitHub, you need to register your app via https://github.com/settings/developers and get a client ID & secret. Set them via the environment variables `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET`. This allows this plugin to act as an OAuth2 client that speaks to GitHub on behalf of users who authorize it.
+To run the demo app and interact with Auth0, you need to setup Auth0:
+1. Create an Auth0 Single Page app client. This is the client that will present a login form that users will interact with.
+2. Set the allowed callback URL in your SPA Auth0 client to `http://<your app's URL>/torii/redirect.html`
+3. Create an Auth0 "Non Interactive" client. This is the client that the cardstack hub server will use to interact with users, aka the "API Client".
+4. Adjust the scopes for the non-interactive client: API-> Non Interactive clients -> click down arrow on the non interactive client created in #3. Set the scopes to include at least: `read:users` `read:users_app_metadata`
+5. Set environment variables for the various Auth0 settings above: `AUTH0_CLIENT_ID`, `AUTH0_CLIENT_SECRET`, `AUTH0_DOMAIN`, `AUTH0_API_CLIENT_ID`, `AUTH0_API_CLIENT_SECRET`. This allows this plugin to act as an OAuth2 client that speaks to GitHub on behalf of users who authorize it.
 
-For the present, you also need a user token that the Hub can use to represent itself. You can use a [Personal Access Token](https://github.com/settings/tokens). Set is via the environment variable `GITHUB_TOKEN`.
 
 * `ember serve`
 * Visit your app at [http://localhost:4200](http://localhost:4200).

@@ -55,6 +55,7 @@ module.exports = class {
       domain: this.domain,
       scope: this.scope,
       toriiRemoteService: this.toriiRemoteService,
+      redirectUri: `${this.appUrl}/torii/redirect.html`,
       popup: this.popup
     };
   }

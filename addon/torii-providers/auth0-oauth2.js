@@ -8,8 +8,9 @@ import {configurable} from 'torii/configuration';
  * @class LinkedInOauth2
  */
 var Auth0OAuth2 = Oauth2.extend({
-  name:       'auth0-oauth2',
-  baseUrl:    configurable('baseUrl'),
+  name:           'auth0-oauth2',
+  baseUrl:        configurable('baseUrl'),
+  redirectUri:    configurable('redirectUri'),
 
   responseParams: ['code', 'state'],
 

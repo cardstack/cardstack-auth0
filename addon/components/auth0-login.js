@@ -13,12 +13,13 @@ export default Ember.Component.extend({
   source: 'auth0',
 
   fetchConfig: task(function * () {
-    let { clientId, domain, toriiRemoteService, popup, scope } = yield getOwner(this).lookup('authenticator:cardstack').fetchConfig(this.get('source'));
+    let { clientId, domain, toriiRemoteService, popup, redirectUri, scope } = yield getOwner(this).lookup('authenticator:cardstack').fetchConfig(this.get('source'));
     let opts = {
       'auth0-oauth2': {
         baseUrl: `https://${domain}/authorize`,
         apiKey: clientId,
-        scope
+        scope,
+        redirectUri
       }
     };
     if (toriiRemoteService) {

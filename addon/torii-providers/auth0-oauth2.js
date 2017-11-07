@@ -14,6 +14,9 @@ var Auth0OAuth2 = Oauth2.extend({
 
   responseParams: ['code', 'state'],
 
+  close() {
+    this.get("popup").close();
+  }
 });
 
 export default Auth0OAuth2;

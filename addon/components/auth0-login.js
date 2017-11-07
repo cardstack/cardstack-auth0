@@ -13,6 +13,8 @@ export default Ember.Component.extend({
   source: 'auth0',
 
   fetchConfig: task(function * () {
+    if (typeof FastBoot !== "undefined") { return; }
+
     let { clientId, domain, toriiRemoteService, popup, redirectUri, scope } = yield getOwner(this).lookup('authenticator:cardstack').fetchConfig(this.get('source'));
     let opts = {
       'auth0-oauth2': {

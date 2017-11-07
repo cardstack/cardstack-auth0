@@ -39,7 +39,11 @@ export default Ember.Component.extend({
     // would require changes to Torii.
     let { authorizationCode } = yield this.get('torii').open('auth0-oauth2', this.get("popup") || {});
     yield this.get('session').authenticate('authenticator:cardstack', this.get('source'), { authorizationCode });
-  }).drop()
+  }).drop(),
+
+  cancelLogin: task(function * () {
+    yield this.get('torii').close('auth0-oauth2');
+  }).drop(),
 });
 
 function extendToriiProviders(newConfig) {

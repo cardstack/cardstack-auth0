@@ -15,7 +15,8 @@ module.exports = class {
     this.toriiRemoteService = params['torii-remote-service'];
     this.popup = params['popup'];
 
-    this.defaultUserTemplate =  "{ \"data\": { \"id\": \"{{sub}}\", \"type\": \"auth0-users\", \"attributes\": { \"name\": \"{{name}}\", \"email\":\"{{email}}\", \"avatar-url\":\"{{picture}}\" }}}";
+    this.defaultUserTemplate = params["default-user-template"] ||
+                               `{ "data": { "id": "{{sub}}", "type": "auth0-users", "attributes": { "name": "{{name}}", "email":"{{email}}", "avatar-url":"{{picture}}" }}}`;
   }
 
   async authenticate(payload /*, userSearcher */) {
@@ -46,7 +47,8 @@ module.exports = class {
       });
     }
 
-    return jwt.decode(body.id_token);
+    let user =  jwt.decode(body.id_token);
+    return user;
   }
 
   exposeConfig() {

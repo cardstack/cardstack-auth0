@@ -40,9 +40,13 @@ export default Ember.Component.extend({
     let { authorizationCode } = yield this.get('torii').open('auth0-oauth2', this.get("popup") || {});
 
     if (authorizationCode) {
-      yield this.get('session').authenticate('authenticator:cardstack', this.get('source'), { authorizationCode });
+      yield this.get('authenticate').perform(authorizationCode);
     }
   }).drop(),
+
+  authenticate: task(function * (authorizationCode) {
+    yield this.get('session').authenticate('authenticator:cardstack', this.get('source'), { authorizationCode });
+  }),
 
   cancelLogin: task(function * () {
     this.get("login").cancelAll();

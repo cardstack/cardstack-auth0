@@ -1,5 +1,6 @@
 {{#unless fetchConfig.isRunning}}
   {{yield (perform login)
           (perform cancelLogin)
-          login.isRunning }}
+          login.isRunning
+          authenticate.isRunning}}
 {{/unless}}

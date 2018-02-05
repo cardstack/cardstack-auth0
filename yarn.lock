@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@cardstack/authentication@^0.4.6":
-  version "0.4.6"
-  resolved "https://registry.yarnpkg.com/@cardstack/authentication/-/authentication-0.4.6.tgz#e7d90e296088312c29b9e4028620d4c6a470586d"
+"@cardstack/authentication@^0.4.7":
+  version "0.4.7"
+  resolved "https://registry.yarnpkg.com/@cardstack/authentication/-/authentication-0.4.7.tgz#6c0ab0b28506ccc1ab6d28afd60796ee7d469902"
   dependencies:
     "@cardstack/di" "^0.4.4"
     "@cardstack/logger" "^0.1.0"
@@ -3007,9 +3007,9 @@ ember-cli-path-utils@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/ember-cli-path-utils/-/ember-cli-path-utils-1.0.0.tgz#4e39af8b55301cddc5017739b77a804fba2071ed"
 
-"ember-cli-postcss@git+https://github.com/ef4/ember-cli-postcss.git#0550adab2c0c0ab856efec6a4da8164eadd01e47":
+"ember-cli-postcss@https://github.com/ef4/ember-cli-postcss#0550adab2c0c0ab856efec6a4da8164eadd01e47":
   version "3.5.0"
-  resolved "git+https://github.com/ef4/ember-cli-postcss.git#0550adab2c0c0ab856efec6a4da8164eadd01e47"
+  resolved "https://github.com/ef4/ember-cli-postcss#0550adab2c0c0ab856efec6a4da8164eadd01e47"
   dependencies:
     bower "1.8.0"
     broccoli-merge-trees "2.0.0"

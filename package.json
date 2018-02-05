@@ -23,7 +23,7 @@
     "test": "ember try:each"
   },
   "dependencies": {
-    "@cardstack/authentication": "^0.4.6",
+    "@cardstack/authentication": "^0.4.7",
     "@cardstack/plugin-utils": "^0.4.5",
     "ember-cli-babel": "^6.8.2",
     "ember-cli-htmlbars": "^2.0.1",
@@ -37,6 +37,7 @@
   "devDependencies": {
     "@cardstack/eslint-config": "^0.4.4",
     "@cardstack/jsonapi": "^0.4.6",
+    "@cardstack/logger": "^0.1.0",
     "@cardstack/models": "^0.4.6",
     "@cardstack/test-support": "^0.4.6",
     "broccoli-asset-rev": "^2.4.5",

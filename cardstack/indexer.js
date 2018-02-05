@@ -1,5 +1,5 @@
 const { isEqual } = require('lodash');
-const log = require('@cardstack/plugin-utils/logger')('auth0-auth/indexer');
+const log = require('@cardstack/logger')('cardstack/auth0-auth/indexer');
 
 module.exports = class Indexer {
 

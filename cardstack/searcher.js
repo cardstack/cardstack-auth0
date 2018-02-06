@@ -10,6 +10,7 @@ module.exports = class Auth0Searcher {
     this.domain = domain;
     this.clientId = opts["api-client-id"];
     this.clientSecret = opts["api-client-secret"];
+    this.gravatarSubstitue = opts['substitute-gravatar-default'];
     this.dataSource = dataSource;
   }
 
@@ -51,6 +52,10 @@ module.exports = class Auth0Searcher {
 
     let response = await request(options);
     response["sub"] = response["user_id"]; // the shape of the user is not symmetric between the API response and the original authenticate response
+
+    if (this.gravatarSubstitue && response.picture) {
+      response.picture = response.picture.replace(/(^http[s]*:\/\/s\.gravatar\.com\/avatar\/[^\?]+.*\&d=).+$/, '$1' + encodeURIComponent(this.gravatarSubstitue));
+    }
     return rewriteExternalUser(response, this.dataSource);
   }
 

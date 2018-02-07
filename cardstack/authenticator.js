@@ -16,7 +16,7 @@ module.exports = class {
     this.popup = params['popup'];
 
     this.defaultUserTemplate = params["default-user-template"] ||
-                               `{ "data": { "id": "{{sub}}", "type": "auth0-users", "attributes": { "name": "{{name}}", "email":"{{email}}", "avatar-url":"{{picture}}" }}}`;
+                               `{ "data": { "id": "{{sub}}", "type": "auth0-users", "attributes": { "name": "{{name}}", "email":"{{email}}", "avatar-url":"{{{picture}}}" }}}`;
   }
 
   async authenticate(payload /*, userSearcher */) {

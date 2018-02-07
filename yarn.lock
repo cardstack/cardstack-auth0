@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@cardstack/authentication@^0.4.7":
-  version "0.4.7"
-  resolved "https://registry.yarnpkg.com/@cardstack/authentication/-/authentication-0.4.7.tgz#6c0ab0b28506ccc1ab6d28afd60796ee7d469902"
+"@cardstack/authentication@^0.4.8":
+  version "0.4.8"
+  resolved "https://registry.yarnpkg.com/@cardstack/authentication/-/authentication-0.4.8.tgz#224e2a38ccd43066b39f47c2679ebe2731b9bec9"
   dependencies:
     "@cardstack/di" "^0.4.4"
     "@cardstack/logger" "^0.1.0"

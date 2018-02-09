@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@cardstack/authentication@^0.4.8":
-  version "0.4.8"
-  resolved "https://registry.yarnpkg.com/@cardstack/authentication/-/authentication-0.4.8.tgz#224e2a38ccd43066b39f47c2679ebe2731b9bec9"
+"@cardstack/authentication@^0.4.10":
+  version "0.4.10"
+  resolved "https://registry.yarnpkg.com/@cardstack/authentication/-/authentication-0.4.10.tgz#e7ada1efc944cd8bf3b8a15436b1ccd4fa038795"
   dependencies:
     "@cardstack/di" "^0.4.4"
     "@cardstack/logger" "^0.1.0"
@@ -3724,6 +3724,15 @@ eslint-plugin-ember@^4.6.1:
     require-folder-tree "^1.4.5"
     snake-case "^2.1.0"
 
+eslint-plugin-node@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-node/-/eslint-plugin-node-6.0.0.tgz#5ad5ee6b5346aec6cc9cde0b8619caed2c6d8f25"
+  dependencies:
+    ignore "^3.3.6"
+    minimatch "^3.0.4"
+    resolve "^1.3.3"
+    semver "^5.4.1"
+
 eslint-scope@^3.7.1:
   version "3.7.1"
   resolved "https://registry.yarnpkg.com/eslint-scope/-/eslint-scope-3.7.1.tgz#3d63c3edfda02e06e01a452ad88caacc7cdcb6e8"
@@ -4772,7 +4781,7 @@ iferr@^0.1.5, iferr@~0.1.5:
   version "0.1.5"
   resolved "https://registry.yarnpkg.com/iferr/-/iferr-0.1.5.tgz#c60eed69e6d8fdb6b3104a1fcbca1c192dc5b501"
 
-ignore@^3.2.0:
+ignore@^3.2.0, ignore@^3.3.6:
   version "3.3.7"
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-3.3.7.tgz#612289bfb3c220e186a58118618d5be8c1bab021"
 

@@ -1,0 +1,6 @@
+{{#cardstack-session as |session|}}
+  {{#if (and session.isPartiallyAuthenticated
+            (eq session.partialAuthenticationMessage.state 'verify-email'))}}
+    {{yield (perform resendEmail session.partialAuthenticationMessage.id)}}
+  {{/if}}
+{{/cardstack-session}}

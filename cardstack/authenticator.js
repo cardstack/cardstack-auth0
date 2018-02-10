@@ -2,6 +2,16 @@ const Error = require('@cardstack/plugin-utils/error');
 const request = require('request-promise');
 const jwt = require('jsonwebtoken');
 
+function cleanupNamespacedProps(obj) {
+  let result = {};
+  Object.keys(obj).forEach(key => {
+    let cleanKey = key.replace(/^(https:\/\/.*\/)?([^\/]+)$/, '$2');
+    result[cleanKey] = obj[key];
+  });
+
+  return result;
+}
+
 module.exports = class {
   static create(...args) {
     return new this(...args);
@@ -14,9 +24,13 @@ module.exports = class {
     this.scope = params['scope'];
     this.toriiRemoteService = params['torii-remote-service'];
     this.popup = params['popup'];
+    this.dataSource = params['dataSource'];
+    this.apiClientId = params["api-client-id"];
+    this.apiClientSecret = params["api-client-secret"];
+    this.dbConnectionName = params["db-connection-name"];
 
     this.defaultUserTemplate = params["default-user-template"] ||
-                               `{ "data": { "id": "{{sub}}", "type": "auth0-users", "attributes": { "name": "{{name}}", "email":"{{email}}", "avatar-url":"{{{picture}}}" }}}`;
+                               `{ "data": { "id": "{{#if sub}}{{sub}}{{else}}{{user_id}}{{/if}}", "type": {{#if email_verified}}"auth0-users"{{else}}"partial-sessions"{{/if}}, "attributes": { "name": "{{name}}", "email":"{{email}}", "avatar-url":"{{{picture}}}", "email-verified":{{email_verified}}{{#unless email_verified}}, "message": { "state": "verify-email", "id": "{{#if sub}}{{sub}}{{else}}{{user_id}}{{/if}}" } {{/unless}} {{#unless email_verified}}, "meta": { "partial-session": true } {{/unless}} }}}`;
   }
 
   async authenticate(payload /*, userSearcher */) {
@@ -48,6 +62,7 @@ module.exports = class {
     }
 
     let user =  jwt.decode(body.id_token);
+    user = cleanupNamespacedProps(user);
     return user;
   }
 

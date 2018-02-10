@@ -1,6 +1,6 @@
 {
   "name": "cardstack-auth0",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "description": "auth0 authentication plugin for Cardstack",
   "keywords": [
     "ember-addon",
@@ -23,12 +23,16 @@
     "test": "ember try:each"
   },
   "dependencies": {
-    "@cardstack/authentication": "^0.4.8",
+    "@cardstack/authentication": "^0.4.10",
+    "@cardstack/di": "^0.4.4",
     "@cardstack/plugin-utils": "^0.4.5",
     "ember-cli-babel": "^6.8.2",
     "ember-cli-htmlbars": "^2.0.1",
     "ember-concurrency": "^0.7.19",
+    "eslint-plugin-node": "^6.0.0",
     "jsonwebtoken": "^8.1.0",
+    "koa-better-route": "^0.1.0",
+    "koa-compose": "^3.2.1",
     "lodash": "^4.17.4",
     "request": "^2.83.0",
     "request-promise": "^4.2.2",

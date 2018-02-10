@@ -1,6 +1,6 @@
-{{#unless fetchConfig.isRunning}}
-  {{yield (perform login)
-          (perform cancelLogin)
-          login.isRunning
-          authenticate.isRunning}}
+{{#unless auth0.fetchConfig.isRunning}}
+  {{yield (perform auth0.login)
+          (perform auth0.cancelLogin)
+          auth0.login.isRunning
+          auth0.authenticate.isRunning}}
 {{/unless}}

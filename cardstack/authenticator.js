@@ -29,8 +29,29 @@ module.exports = class {
     this.apiClientSecret = params["api-client-secret"];
     this.dbConnectionName = params["db-connection-name"];
 
-    this.defaultUserTemplate = params["default-user-template"] ||
-                               `{ "data": { "id": "{{#if sub}}{{sub}}{{else}}{{user_id}}{{/if}}", "type": {{#if email_verified}}"auth0-users"{{else}}"partial-sessions"{{/if}}, "attributes": { "name": "{{name}}", "email":"{{email}}", "avatar-url":"{{{picture}}}", "email-verified":{{email_verified}}{{#unless email_verified}}, "message": { "state": "verify-email", "id": "{{#if sub}}{{sub}}{{else}}{{user_id}}{{/if}}" } {{/unless}} {{#unless email_verified}}, "meta": { "partial-session": true } {{/unless}} }}}`;
+    this.defaultUserTemplate = `{
+      "data": {
+        "id": "{{#if sub}}{{sub}}{{else}}{{user_id}}{{/if}}",
+        "type": {{#if email_verified}}"auth0-users"{{else}}"partial-sessions"{{/if}},
+        "attributes": {
+          "name": "{{name}}",
+          "email":"{{email}}",
+          "avatar-url":"{{{picture}}}",
+          "email-verified":{{email_verified}}
+          {{#unless email_verified}},
+            "message": {
+              "state": "verify-email",
+              "id": "{{#if sub}}{{sub}}{{else}}{{user_id}}{{/if}}"
+            }
+          {{/unless}}
+        }
+      }
+      {{#unless email_verified}},
+        "meta": {
+          "partial-session": true
+        }
+      {{/unless}}
+    }`;
   }
 
   async authenticate(payload /*, userSearcher */) {

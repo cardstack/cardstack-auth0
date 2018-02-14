@@ -14,14 +14,14 @@ module.exports = class Auth0Searcher {
     this.dataSource = dataSource;
   }
 
-  async get(branch, type, id, next) {
+  async get(session, branch, type, id, next) {
     if (type === 'auth0-users') {
       return this._getUser(id);
     }
     return next();
   }
 
-  async search(branch, query, next) {
+  async search(session, branch, query, next) {
     return next();
   }
 

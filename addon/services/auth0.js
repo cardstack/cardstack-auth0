@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import { configure, getConfiguration } from 'torii/configuration';
 import { task } from 'ember-concurrency';
+import { hubURL } from '@cardstack/plugin-utils/environment';
 const { getOwner } = Ember;
 
 function extendToriiProviders(newConfig) {
@@ -53,6 +54,10 @@ export default Ember.Service.extend({
   authenticate: task(function * (authorizationCode) {
     yield this.get('session').authenticate('authenticator:cardstack', this.get('source'), { authorizationCode });
   }),
+
+  sendChangePasswordEmail: task(function * (email) {
+    yield fetch(`${hubURL}/auth0/change-password-email/${email}`, { method: "POST" });
+  }).drop(),
 
   cancelLogin: task(function * () {
     this.get("login").cancelAll();

@@ -2,7 +2,7 @@ import Ember from 'ember';
 import { configure, getConfiguration } from 'torii/configuration';
 import { task } from 'ember-concurrency';
 import { hubURL } from '@cardstack/plugin-utils/environment';
-let bowser = window.require('bowser');
+import bowser from 'bowser';
 const { getOwner } = Ember;
 
 function extendToriiProviders(newConfig) {
@@ -38,8 +38,13 @@ export default Ember.Service.extend({
         redirectUri
       }
     };
-    console.log("bowser", bowser);
-    if (toriiRemoteService) {
+
+    let forcePopup;
+    (forcePopupBrowserList || []).forEach(browser => {
+      forcePopup = forcePopup || !!bowser[browser];
+    });
+
+    if (toriiRemoteService && !forcePopup) {
       opts["auth0-oauth2"]["remoteServiceName"] = toriiRemoteService;
     }
     extendToriiProviders(opts);

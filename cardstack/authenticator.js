@@ -28,6 +28,7 @@ module.exports = class {
     this.apiClientId = params["api-client-id"];
     this.apiClientSecret = params["api-client-secret"];
     this.dbConnectionName = params["db-connection-name"];
+    this.forcePopupBrowserList = params["force-popup-browser-list"];
 
     this.defaultUserTemplate = `{
       "data": {
@@ -94,7 +95,8 @@ module.exports = class {
       scope: this.scope,
       toriiRemoteService: this.toriiRemoteService,
       redirectUri: `${this.appUrl}/torii/redirect.html`,
-      popup: this.popup
+      popup: this.popup,
+      forcePopupBrowserList: this.forcePopupBrowserList
     };
   }
 

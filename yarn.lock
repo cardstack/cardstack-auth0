@@ -2,13 +2,13 @@
 # yarn lockfile v1
 
 
-"@cardstack/authentication@^0.5.7":
-  version "0.5.7"
-  resolved "https://registry.yarnpkg.com/@cardstack/authentication/-/authentication-0.5.7.tgz#79e5ebd37efd0c614bd233a54f097bf3b7653c24"
+"@cardstack/authentication@^0.5.10":
+  version "0.5.10"
+  resolved "https://registry.yarnpkg.com/@cardstack/authentication/-/authentication-0.5.10.tgz#506cabc194dfcbb9230ef25d334229317c0904c9"
   dependencies:
-    "@cardstack/di" "^0.5.0"
+    "@cardstack/di" "^0.5.8"
     "@cardstack/logger" "^0.1.0"
-    "@cardstack/plugin-utils" "^0.5.2"
+    "@cardstack/plugin-utils" "^0.5.8"
     ember-cli-babel "^6.8.2"
     ember-cli-htmlbars "^2.0.1"
     ember-css-url "0.2.0"
@@ -44,6 +44,13 @@
 "@cardstack/di@^0.5.0":
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/@cardstack/di/-/di-0.5.0.tgz#688bd40d49c194271361b284ae95b02310ab2452"
+  dependencies:
+    "@glimmer/di" "^0.2.0"
+    resolve "^1.3.3"
+
+"@cardstack/di@^0.5.8":
+  version "0.5.8"
+  resolved "https://registry.yarnpkg.com/@cardstack/di/-/di-0.5.8.tgz#32db891ca73ccb35d78d589442179825276691e0"
   dependencies:
     "@glimmer/di" "^0.2.0"
     resolve "^1.3.3"
@@ -145,6 +152,18 @@
   resolved "https://registry.yarnpkg.com/@cardstack/plugin-utils/-/plugin-utils-0.5.2.tgz#0e79301e755f4a75cd445296102884b43cb8c578"
   dependencies:
     "@cardstack/di" "^0.5.0"
+    broccoli-plugin "^1.3.0"
+    ember-cli-babel "^6.8.2"
+    handlebars "^4.0.6"
+    ms "2.0.0"
+    superagent "^3.8.1"
+    symlink-or-copy "^1.1.8"
+
+"@cardstack/plugin-utils@^0.5.8":
+  version "0.5.8"
+  resolved "https://registry.yarnpkg.com/@cardstack/plugin-utils/-/plugin-utils-0.5.8.tgz#63e9edad7b7ec66775a1a25ac3e51168732b4d24"
+  dependencies:
+    "@cardstack/di" "^0.5.8"
     broccoli-plugin "^1.3.0"
     ember-cli-babel "^6.8.2"
     handlebars "^4.0.6"

@@ -3,13 +3,6 @@ import { configure, getConfiguration } from 'torii/configuration';
 import { task } from 'ember-concurrency';
 import { hubURL } from '@cardstack/plugin-utils/environment';
 import bowser from 'bowser';
-import { clientId,
-         domain,
-         toriiRemoteService,
-         popup,
-         redirectUri,
-         forcePopupBrowserList,
-         scope } from 'cardstack-auth0/environment';
 
 function extendToriiProviders(newConfig) {
   let toriiConfig = Object.assign({}, getConfiguration());
@@ -28,6 +21,16 @@ export default Ember.Service.extend({
 
   init() {
     this._super();
+
+    if (typeof FastBoot !== 'undefined') { return; }
+
+    let { clientId,
+          toriiRemoteService,
+          domain,
+          popup,
+          redirectUri,
+          forcePopupBrowserList,
+          scope } = window.require('cardstack-auth0/environment');
 
     let opts = {
       'auth0-oauth2': {

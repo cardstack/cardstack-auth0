@@ -22,7 +22,13 @@ export default Ember.Service.extend({
   init() {
     this._super();
 
-    if (typeof FastBoot !== 'undefined') { return; }
+    let env;
+    try {
+      env = window.require('cardstack-auth0/environment');
+    } catch (err) {
+      // running in an env that cardstack-auth0 is not available like prember or fastboot...
+      return;
+    }
 
     let { clientId,
           toriiRemoteService,
@@ -30,7 +36,7 @@ export default Ember.Service.extend({
           popup,
           redirectUri,
           forcePopupBrowserList,
-          scope } = window.require('cardstack-auth0/environment');
+          scope } = env;
 
     let opts = {
       'auth0-oauth2': {

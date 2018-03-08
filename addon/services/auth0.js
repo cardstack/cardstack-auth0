@@ -3,7 +3,13 @@ import { configure, getConfiguration } from 'torii/configuration';
 import { task } from 'ember-concurrency';
 import { hubURL } from '@cardstack/plugin-utils/environment';
 import bowser from 'bowser';
-const { getOwner } = Ember;
+import { clientId,
+         domain,
+         toriiRemoteService,
+         popup,
+         redirectUri,
+         forcePopupBrowserList,
+         scope } from 'cardstack-auth0/environment';
 
 function extendToriiProviders(newConfig) {
   let toriiConfig = Object.assign({}, getConfiguration());
@@ -20,16 +26,9 @@ export default Ember.Service.extend({
 
   source: 'auth0',
 
-  fetchConfig: task(function * () {
-    if (typeof FastBoot !== "undefined") { return; }
+  init() {
+    this._super();
 
-    let { clientId,
-          domain,
-          toriiRemoteService,
-          popup,
-          redirectUri,
-          forcePopupBrowserList,
-          scope } = yield getOwner(this).lookup('authenticator:cardstack').fetchConfig(this.get('source'));
     let opts = {
       'auth0-oauth2': {
         baseUrl: `https://${domain}/authorize`,
@@ -40,7 +39,8 @@ export default Ember.Service.extend({
     };
 
     let forcePopup;
-    (forcePopupBrowserList || []).forEach(browser => {
+    let forcePopupBrowsers = forcePopupBrowserList ? forcePopupBrowserList.split(',') : [];
+    forcePopupBrowsers.forEach(browser => {
       forcePopup = forcePopup || !!bowser[browser];
     });
 
@@ -49,7 +49,7 @@ export default Ember.Service.extend({
     }
     extendToriiProviders(opts);
     this.set("popup", popup);
-  }).observes('source').on('init'),
+  },
 
   login: task(function * () {
     // this should wait for fetchConfig to be done, but if we block

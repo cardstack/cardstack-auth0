@@ -1,4 +1,3 @@
-const { URL } = require('url');
 const Handlebars = require('handlebars');
 const { declareInjections } = require('@cardstack/di');
 
@@ -25,6 +24,8 @@ class LiveQueryCodeGenerator {
   async generateCode() {
     let activeSources = await this.sources.active();
     let source = activeSources.get(sourceName);
+    if (!source.authenticator) { return; }
+
     let { clientId,
           domain,
           scope,

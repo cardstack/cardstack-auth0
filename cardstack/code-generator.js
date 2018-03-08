@@ -24,7 +24,7 @@ class LiveQueryCodeGenerator {
   async generateCode() {
     let activeSources = await this.sources.active();
     let source = activeSources.get(sourceName);
-    if (!source && source.authenticator) { return; }
+    if (!source || !source.authenticator) { return; }
 
     let { clientId,
           domain,

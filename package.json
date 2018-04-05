@@ -1,6 +1,6 @@
 {
   "name": "cardstack-auth0",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "auth0 authentication plugin for Cardstack",
   "keywords": [
     "ember-addon",

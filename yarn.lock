@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@cardstack/authentication@^0.6.10":
-  version "0.6.10"
-  resolved "https://registry.yarnpkg.com/@cardstack/authentication/-/authentication-0.6.10.tgz#86f954b2c0e7d97be1d97dcb4c12b0c184ace19d"
+"@cardstack/authentication@^0.6.11":
+  version "0.6.11"
+  resolved "https://registry.yarnpkg.com/@cardstack/authentication/-/authentication-0.6.11.tgz#8829e29442a1d8a53d3f792a0b2867fa511e8449"
   dependencies:
     "@cardstack/di" "^0.6.8"
     "@cardstack/logger" "^0.1.0"
@@ -20,9 +20,9 @@
     koa-compose "^3.2.1"
     koa-json-body "^5.3.0"
 
-"@cardstack/codegen@^0.6.9":
-  version "0.6.9"
-  resolved "https://registry.yarnpkg.com/@cardstack/codegen/-/codegen-0.6.9.tgz#2716fe40e1b8a5344c33b2e4a9ce76d1e2de8970"
+"@cardstack/codegen@^0.6.11":
+  version "0.6.11"
+  resolved "https://registry.yarnpkg.com/@cardstack/codegen/-/codegen-0.6.11.tgz#8a869e30ad8a2e23725a12821b45a250ad95b165"
   dependencies:
     "@cardstack/di" "^0.6.8"
     "@cardstack/plugin-utils" "^0.6.8"
@@ -78,11 +78,11 @@
   dependencies:
     handlebars "^4.0.6"
 
-"@cardstack/hub@^0.6.9":
-  version "0.6.9"
-  resolved "https://registry.yarnpkg.com/@cardstack/hub/-/hub-0.6.9.tgz#9375e0690181a75e0ac7b21a9cf1def87bd6a4d5"
+"@cardstack/hub@^0.6.11":
+  version "0.6.11"
+  resolved "https://registry.yarnpkg.com/@cardstack/hub/-/hub-0.6.11.tgz#a717b41feaa4fd9eb65d0e8e4e0fa5de4fe247dc"
   dependencies:
-    "@cardstack/codegen" "^0.6.9"
+    "@cardstack/codegen" "^0.6.11"
     "@cardstack/core-types" "^0.6.8"
     "@cardstack/di" "^0.6.8"
     "@cardstack/elasticsearch" "^0.6.9"
@@ -110,9 +110,9 @@
     tar-fs "^1.16.0"
     tar-stream "^1.5.4"
 
-"@cardstack/jsonapi@^0.6.9":
-  version "0.6.9"
-  resolved "https://registry.yarnpkg.com/@cardstack/jsonapi/-/jsonapi-0.6.9.tgz#97c035fb89f44faf54d4700ac4d8bc276c52e4d0"
+"@cardstack/jsonapi@^0.6.11":
+  version "0.6.11"
+  resolved "https://registry.yarnpkg.com/@cardstack/jsonapi/-/jsonapi-0.6.11.tgz#cf22a0f5c7207d6f96ab780f17e9bbb7bc1e74fa"
   dependencies:
     "@cardstack/di" "^0.6.8"
     "@cardstack/logger" "^0.1.0"
@@ -127,14 +127,14 @@
   dependencies:
     ms "2.0.0"
 
-"@cardstack/models@^0.6.9":
-  version "0.6.9"
-  resolved "https://registry.yarnpkg.com/@cardstack/models/-/models-0.6.9.tgz#70d46c91167cc5327e75b8c40e076431c7694036"
+"@cardstack/models@^0.6.11":
+  version "0.6.11"
+  resolved "https://registry.yarnpkg.com/@cardstack/models/-/models-0.6.11.tgz#727245c3b322575b3914850327cfe90c4c48df35"
   dependencies:
-    "@cardstack/codegen" "^0.6.9"
+    "@cardstack/codegen" "^0.6.11"
     "@cardstack/di" "^0.6.8"
     "@cardstack/plugin-utils" "^0.6.8"
-    "@cardstack/tools" "^0.6.9"
+    "@cardstack/tools" "^0.6.11"
     ember-cli-babel "^6.8.2"
     ember-inject-optional "^0.1.0"
     ember-resource-metadata "^0.2.0"
@@ -164,14 +164,14 @@
     ember-overlays "^1.0.2"
     ember-truth-helpers "^2.0.0"
 
-"@cardstack/test-support@^0.6.9":
-  version "0.6.9"
-  resolved "https://registry.yarnpkg.com/@cardstack/test-support/-/test-support-0.6.9.tgz#82d3c57cb17c05848d01f5f53a3756843cb67d25"
+"@cardstack/test-support@^0.6.11":
+  version "0.6.11"
+  resolved "https://registry.yarnpkg.com/@cardstack/test-support/-/test-support-0.6.11.tgz#3a6563a6e586a00c77ae32b084fb06261c76c63d"
   dependencies:
     "@cardstack/di" "^0.6.8"
     "@cardstack/elasticsearch" "^0.6.9"
     "@cardstack/ephemeral" "^0.6.8"
-    "@cardstack/hub" "^0.6.9"
+    "@cardstack/hub" "^0.6.11"
     "@cardstack/logger" "^0.1.0"
     "@cardstack/plugin-utils" "^0.6.8"
     "@std/esm" "^0.25.1"
@@ -192,9 +192,9 @@
     resolve "^1.3.3"
     temp "^0.8.3"
 
-"@cardstack/tools@^0.6.9":
-  version "0.6.9"
-  resolved "https://registry.yarnpkg.com/@cardstack/tools/-/tools-0.6.9.tgz#e1f20efba660fe879846ceaa810642ac008dabe7"
+"@cardstack/tools@^0.6.11":
+  version "0.6.11"
+  resolved "https://registry.yarnpkg.com/@cardstack/tools/-/tools-0.6.11.tgz#94c67509e81452f7e09580ef3f1cb9d6fd78297c"
   dependencies:
     "@cardstack/plugin-utils" "^0.6.8"
     "@cardstack/rendering" "^0.6.8"
@@ -2749,6 +2749,16 @@ ember-cli-normalize-entity-name@^1.0.0:
 ember-cli-path-utils@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/ember-cli-path-utils/-/ember-cli-path-utils-1.0.0.tgz#4e39af8b55301cddc5017739b77a804fba2071ed"
+
+"ember-cli-postcss@git+https://github.com/ef4/ember-cli-postcss.git#0550adab2c0c0ab856efec6a4da8164eadd01e47":
+  version "3.5.0"
+  resolved "git+https://github.com/ef4/ember-cli-postcss.git#0550adab2c0c0ab856efec6a4da8164eadd01e47"
+  dependencies:
+    bower "1.8.0"
+    broccoli-merge-trees "2.0.0"
+    broccoli-postcss "3.5.0"
+    broccoli-postcss-single "1.4.0"
+    merge "1.2.0"
 
 "ember-cli-postcss@https://github.com/ef4/ember-cli-postcss#0550adab2c0c0ab856efec6a4da8164eadd01e47":
   version "3.5.0"

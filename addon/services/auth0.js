@@ -1,8 +1,11 @@
 import Ember from 'ember';
 import { configure, getConfiguration } from 'torii/configuration';
+import { inject as service } from '@ember/service';
 import { task } from 'ember-concurrency';
 import { hubURL } from '@cardstack/plugin-utils/environment';
 import bowser from 'bowser';
+
+const { get, set } = Ember;
 
 function extendToriiProviders(newConfig) {
   let toriiConfig = Object.assign({}, getConfiguration());
@@ -14,10 +17,14 @@ function extendToriiProviders(newConfig) {
 }
 
 export default Ember.Service.extend({
-  session: Ember.inject.service(),
-  torii: Ember.inject.service(),
+  session: service(),
+  cardstackSession: service(),
+  torii: service(),
 
   source: 'auth0',
+  authenticationHandler: null,
+  partialAuthenticationHandler: null,
+  authenticationFailedHandler: null,
 
   init() {
     this._super();
@@ -57,33 +64,51 @@ export default Ember.Service.extend({
       opts["auth0-oauth2"]["remoteServiceName"] = toriiRemoteService;
     }
     extendToriiProviders(opts);
-    this.set("popup", popup);
+    set(this,"popup", popup);
   },
 
-  login: task(function * () {
+
+  login: task(function* () {
     // this should wait for fetchConfig to be done, but if we block
     // before opening the popup window we run afoul of popup
     // blockers. So instead in our template we don't render ourself at
     // all until after fetchConfig finishes. Fixing this more nicely
     // would require changes to Torii.
-    let { authorizationCode } = yield this.get('torii').open('auth0-oauth2', this.get("popup") || {});
+    let { authorizationCode } = yield get(this, 'torii').open('auth0-oauth2', get(this, "popup") || {});
 
     if (authorizationCode) {
-      yield this.get('authenticate').perform(authorizationCode);
+      yield get(this, 'authenticate').perform(authorizationCode);
     }
   }).drop(),
 
-  authenticate: task(function * (authorizationCode) {
-    yield this.get('session').authenticate('authenticator:cardstack', this.get('source'), { authorizationCode });
+  authenticate: task(function* (authorizationCode) {
+    yield get(this, 'session').authenticate('authenticator:cardstack', get(this, 'source'), { authorizationCode });
+
+    let session = get(this, 'cardstackSession');
+    let onAuthenticationHandler = get(this, 'authenticationHandler');
+    let onPartialAuthenticationHandler = get(this, 'partialAuthenticationHandler');
+    let onAuthenticationFailedHandler = get(this, 'authenticationFailedHandler');
+
+    if (get(session, 'isAuthenticated') &&
+      typeof onAuthenticationHandler === 'function') {
+      onAuthenticationHandler(session);
+    } else if (get(session, 'isPartiallyAuthenticated') && typeof
+      onPartialAuthenticationHandler === 'function') {
+      onPartialAuthenticationHandler(session);
+    } else if (!get(session, 'isAuthenticated') &&
+      !get(session, 'isPartiallyAuthenticated') &&
+      onAuthenticationFailedHandler === 'function') {
+      onAuthenticationFailedHandler();
+    }
   }),
 
-  sendChangePasswordEmail: task(function * (email) {
+  sendChangePasswordEmail: task(function* (email) {
     yield fetch(`${hubURL}/auth0/change-password-email/${email}`, { method: "POST" });
   }).drop(),
 
-  cancelLogin: task(function * () {
-    this.get("login").cancelAll();
-    yield this.get('torii').close('auth0-oauth2');
+  cancelLogin: task(function* () {
+    get(this, "login").cancelAll();
+    yield get(this, 'torii').close('auth0-oauth2');
   }).drop(),
 });
 

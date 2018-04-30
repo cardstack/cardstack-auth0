@@ -7,7 +7,7 @@ export default Ember.Component.extend({
   layout,
   tagName: '',
 
-  resendEmail: task(function * (id) {
+  resendEmail: task(function* (id) {
     yield fetch(`${hubURL}/auth0/verification-email/${id}`, { method: "POST" });
   }).drop(),
 })

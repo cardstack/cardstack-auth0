@@ -2,13 +2,13 @@
 # yarn lockfile v1
 
 
-"@cardstack/authentication@^0.6.19":
-  version "0.6.19"
-  resolved "https://registry.yarnpkg.com/@cardstack/authentication/-/authentication-0.6.19.tgz#2d176b4736637f3796e0b86b736b3969c652b275"
+"@cardstack/authentication@^0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@cardstack/authentication/-/authentication-0.7.0.tgz#4957ca321c7c25ae0712fe6530b7821368237602"
   dependencies:
     "@cardstack/di" "0.6.14"
     "@cardstack/logger" "^0.1.0"
-    "@cardstack/plugin-utils" "0.6.14"
+    "@cardstack/plugin-utils" "0.7.0"
     ember-cli-babel "^6.8.2"
     ember-cli-htmlbars "^2.0.1"
     ember-css-url "0.2.0"
@@ -20,12 +20,12 @@
     koa-compose "^3.2.1"
     koa-json-body "^5.3.0"
 
-"@cardstack/codegen@0.6.19":
-  version "0.6.19"
-  resolved "https://registry.yarnpkg.com/@cardstack/codegen/-/codegen-0.6.19.tgz#5def8c3cb251d02bba78012e1e173f7c150e4728"
+"@cardstack/codegen@0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@cardstack/codegen/-/codegen-0.7.0.tgz#7b416ce0c6a9e18d04e15f83fa16b688cfa021e9"
   dependencies:
     "@cardstack/di" "0.6.14"
-    "@cardstack/plugin-utils" "0.6.14"
+    "@cardstack/plugin-utils" "0.7.0"
     ember-cli-babel "^6.8.2"
     ember-fetch "^1.4.0"
     koa-better-route "^0.1.0"
@@ -48,24 +48,24 @@
     "@glimmer/di" "^0.2.0"
     resolve "^1.3.3"
 
-"@cardstack/elasticsearch@0.6.14":
-  version "0.6.14"
-  resolved "https://registry.yarnpkg.com/@cardstack/elasticsearch/-/elasticsearch-0.6.14.tgz#7ad4cbf6a399579afec5cbb7fe2008623c9a3041"
+"@cardstack/elasticsearch@0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@cardstack/elasticsearch/-/elasticsearch-0.7.0.tgz#eb65c46462f8dc54faeff16a2cdd90fb09b1b24c"
   dependencies:
     "@cardstack/di" "0.6.14"
     "@cardstack/logger" "^0.1.0"
-    "@cardstack/plugin-utils" "0.6.14"
+    "@cardstack/plugin-utils" "0.7.0"
     elasticsearch "^12.1.3"
     jsondiffpatch "^0.2.5"
     lodash "^4.17.4"
 
-"@cardstack/ephemeral@0.6.14":
-  version "0.6.14"
-  resolved "https://registry.yarnpkg.com/@cardstack/ephemeral/-/ephemeral-0.6.14.tgz#a12b1544241d484db6bc04ece1337e753bde75b0"
+"@cardstack/ephemeral@0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@cardstack/ephemeral/-/ephemeral-0.7.0.tgz#f487350baac2527d7b0af8329cec34577a305eb3"
   dependencies:
     "@cardstack/di" "0.6.14"
     "@cardstack/logger" "^0.1.0"
-    "@cardstack/plugin-utils" "0.6.14"
+    "@cardstack/plugin-utils" "0.7.0"
     lodash "^4.17.4"
 
 "@cardstack/eslint-config@^0.6.14":
@@ -78,17 +78,17 @@
   dependencies:
     handlebars "^4.0.6"
 
-"@cardstack/hub@0.6.19":
-  version "0.6.19"
-  resolved "https://registry.yarnpkg.com/@cardstack/hub/-/hub-0.6.19.tgz#0503915ab2fac2094b47b406dd5c2fcb7f34c899"
+"@cardstack/hub@0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@cardstack/hub/-/hub-0.7.0.tgz#0acfad3b00bff468d4cb299852fbea622c9c3f04"
   dependencies:
-    "@cardstack/codegen" "0.6.19"
+    "@cardstack/codegen" "0.7.0"
     "@cardstack/core-types" "0.6.14"
     "@cardstack/di" "0.6.14"
-    "@cardstack/elasticsearch" "0.6.14"
+    "@cardstack/elasticsearch" "0.7.0"
     "@cardstack/handlebars" "0.6.14"
     "@cardstack/logger" "^0.1.0"
-    "@cardstack/plugin-utils" "0.6.14"
+    "@cardstack/plugin-utils" "0.7.0"
     broccoli-concat "^3.2.2"
     broccoli-plugin "^1.3.0"
     broccoli-source "^1.1.0"
@@ -110,13 +110,13 @@
     tar-fs "^1.16.0"
     tar-stream "^1.5.4"
 
-"@cardstack/jsonapi@^0.6.19":
-  version "0.6.19"
-  resolved "https://registry.yarnpkg.com/@cardstack/jsonapi/-/jsonapi-0.6.19.tgz#a513a8e64dcb16b30b144194000a68d42bb7bfc9"
+"@cardstack/jsonapi@^0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@cardstack/jsonapi/-/jsonapi-0.7.0.tgz#297b365dfd14170f4801373d0a6761fde67a31a1"
   dependencies:
     "@cardstack/di" "0.6.14"
     "@cardstack/logger" "^0.1.0"
-    "@cardstack/plugin-utils" "0.6.14"
+    "@cardstack/plugin-utils" "0.7.0"
     koa-json-body "^5.3.0"
     lodash "^4.17.4"
     qs "^6.4.0"
@@ -127,23 +127,23 @@
   dependencies:
     ms "2.0.0"
 
-"@cardstack/models@^0.6.19":
-  version "0.6.19"
-  resolved "https://registry.yarnpkg.com/@cardstack/models/-/models-0.6.19.tgz#ff861e01f8622a87fb5f1338a58a9421ce985824"
+"@cardstack/models@^0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@cardstack/models/-/models-0.7.0.tgz#06c569cafb1eaea8a4a1c2616fbed1cc80b014f0"
   dependencies:
-    "@cardstack/codegen" "0.6.19"
+    "@cardstack/codegen" "0.7.0"
     "@cardstack/di" "0.6.14"
-    "@cardstack/plugin-utils" "0.6.14"
-    "@cardstack/tools" "0.6.19"
+    "@cardstack/plugin-utils" "0.7.0"
+    "@cardstack/tools" "0.7.0"
     ember-cli-babel "^6.8.2"
     ember-inject-optional "^0.1.0"
     ember-resource-metadata "^0.2.0"
     handlebars "^4.0.6"
     inflection "^1.12.0"
 
-"@cardstack/plugin-utils@0.6.14", "@cardstack/plugin-utils@^0.6.14":
-  version "0.6.14"
-  resolved "https://registry.yarnpkg.com/@cardstack/plugin-utils/-/plugin-utils-0.6.14.tgz#4e1237b827770f0bc12670ef9fc900ac00c8988b"
+"@cardstack/plugin-utils@0.7.0", "@cardstack/plugin-utils@^0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@cardstack/plugin-utils/-/plugin-utils-0.7.0.tgz#fa764a8e5babc6e8a5cd908998b4ed697a842f9c"
   dependencies:
     "@cardstack/di" "0.6.14"
     broccoli-plugin "^1.3.0"
@@ -164,16 +164,16 @@
     ember-overlays "^1.0.2"
     ember-truth-helpers "^2.0.0"
 
-"@cardstack/test-support@^0.6.19":
-  version "0.6.19"
-  resolved "https://registry.yarnpkg.com/@cardstack/test-support/-/test-support-0.6.19.tgz#c1869bffdcf7e1ba2d3bf86f299656610543f746"
+"@cardstack/test-support@^0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@cardstack/test-support/-/test-support-0.7.0.tgz#ca8da20b633bb9c5bdf74ac06a2bcb1eef756099"
   dependencies:
     "@cardstack/di" "0.6.14"
-    "@cardstack/elasticsearch" "0.6.14"
-    "@cardstack/ephemeral" "0.6.14"
-    "@cardstack/hub" "0.6.19"
+    "@cardstack/elasticsearch" "0.7.0"
+    "@cardstack/ephemeral" "0.7.0"
+    "@cardstack/hub" "0.7.0"
     "@cardstack/logger" "^0.1.0"
-    "@cardstack/plugin-utils" "0.6.14"
+    "@cardstack/plugin-utils" "0.7.0"
     "@std/esm" "^0.25.1"
     chai "^3.5.0"
     chai-things "^0.2.0"
@@ -192,11 +192,11 @@
     resolve "^1.3.3"
     temp "^0.8.3"
 
-"@cardstack/tools@0.6.19":
-  version "0.6.19"
-  resolved "https://registry.yarnpkg.com/@cardstack/tools/-/tools-0.6.19.tgz#87a8ac713f841baa453465b5fc91d8aa707b9150"
+"@cardstack/tools@0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@cardstack/tools/-/tools-0.7.0.tgz#6bd427d54f437a5ad92c9c00cd55bf898d0c6fbd"
   dependencies:
-    "@cardstack/plugin-utils" "0.6.14"
+    "@cardstack/plugin-utils" "0.7.0"
     "@cardstack/rendering" "0.6.14"
     ember-cli-babel "^6.8.2"
     ember-cli-htmlbars "^2.0.1"

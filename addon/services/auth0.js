@@ -82,7 +82,13 @@ export default Ember.Service.extend({
   }).drop(),
 
   authenticate: task(function* (authorizationCode) {
-    yield get(this, 'session').authenticate('authenticator:cardstack', get(this, 'source'), { authorizationCode });
+    let message;
+
+    try {
+      yield get(this, 'session').authenticate('authenticator:cardstack', get(this, 'source'), { authorizationCode });
+    } catch(err) {
+      message = err.message;
+    }
 
     let session = get(this, 'cardstackSession');
     let onAuthenticationHandler = get(this, 'authenticationHandler');
@@ -96,9 +102,9 @@ export default Ember.Service.extend({
       onPartialAuthenticationHandler === 'function') {
       onPartialAuthenticationHandler(session);
     } else if (!get(session, 'isAuthenticated') &&
-      !get(session, 'isPartiallyAuthenticated') &&
+      !get(session, 'isPartiallyAuthenticated') && typeof
       onAuthenticationFailedHandler === 'function') {
-      onAuthenticationFailedHandler();
+      onAuthenticationFailedHandler(message);
     }
   }),
 

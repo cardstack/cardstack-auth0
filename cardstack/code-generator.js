@@ -42,6 +42,9 @@ class LiveQueryCodeGenerator {
       name: 'domain',
       value: domain
     },{
+      name: 'appUrl',
+      value: appUrl
+    },{
       name: 'scope',
       value: scope
     },{

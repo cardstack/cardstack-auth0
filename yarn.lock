@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@cardstack/authentication@^0.7.8":
-  version "0.7.8"
-  resolved "https://registry.yarnpkg.com/@cardstack/authentication/-/authentication-0.7.8.tgz#75645c4762cb1a2b3ab24ee8a9447c5763892f66"
+"@cardstack/authentication@^0.7.9":
+  version "0.7.9"
+  resolved "https://registry.yarnpkg.com/@cardstack/authentication/-/authentication-0.7.9.tgz#3db26999b1ce113f7d9ab8a9bf9c14c6feaa9a7e"
   dependencies:
     "@cardstack/di" "0.6.14"
     "@cardstack/logger" "^0.1.0"
@@ -127,14 +127,14 @@
   dependencies:
     ms "2.0.0"
 
-"@cardstack/models@^0.7.8":
-  version "0.7.8"
-  resolved "https://registry.yarnpkg.com/@cardstack/models/-/models-0.7.8.tgz#a2edfd6e570f36e4577c9f7f0f7398b4e53dee83"
+"@cardstack/models@^0.7.9":
+  version "0.7.9"
+  resolved "https://registry.yarnpkg.com/@cardstack/models/-/models-0.7.9.tgz#a9ea7a8f07ba4cc68794cd57316c6cdec40dd387"
   dependencies:
     "@cardstack/codegen" "0.7.1"
     "@cardstack/di" "0.6.14"
     "@cardstack/plugin-utils" "0.7.0"
-    "@cardstack/tools" "0.7.8"
+    "@cardstack/tools" "0.7.9"
     ember-cli-babel "^6.8.2"
     ember-inject-optional "^0.1.0"
     ember-resource-metadata "^0.2.0"
@@ -192,9 +192,9 @@
     resolve "^1.3.3"
     temp "^0.8.3"
 
-"@cardstack/tools@0.7.8":
-  version "0.7.8"
-  resolved "https://registry.yarnpkg.com/@cardstack/tools/-/tools-0.7.8.tgz#738c5080966a1000100be8e9ec0221c16913a91a"
+"@cardstack/tools@0.7.9":
+  version "0.7.9"
+  resolved "https://registry.yarnpkg.com/@cardstack/tools/-/tools-0.7.9.tgz#75001c8a123e6f54c861aa85e92d2c72028ede3c"
   dependencies:
     "@cardstack/plugin-utils" "0.7.0"
     "@cardstack/rendering" "0.6.14"

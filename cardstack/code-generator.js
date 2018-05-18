@@ -19,7 +19,7 @@ module.exports = declareInjections({
   sources: 'hub:data-sources',
 },
 
-class LiveQueryCodeGenerator {
+class Auth0CodeGenerator {
 
   async generateCode() {
     let activeSources = await this.sources.active();

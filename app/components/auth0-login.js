@@ -1,1 +1,1 @@
-export { default } from 'cardstack-auth0/components/auth0-login';
+export { default } from '@cardstack/auth0/components/auth0-login';

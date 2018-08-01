@@ -27,7 +27,7 @@ function initialModels() {
   let factory = new JSONAPIFactory();
   factory.addResource('data-sources', 'auth0')
     .withAttributes({
-      sourceType: 'cardstack-auth0',
+      sourceType: '@cardstack/auth0',
       params: {
         'client-id': process.env.AUTH0_CLIENT_ID,
         'client-secret': process.env.AUTH0_CLIENT_SECRET,

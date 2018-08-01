@@ -1,4 +1,4 @@
-const log = require('@cardstack/logger')('cardstack-auth0');
+const log = require('@cardstack/logger')('@cardstack/auth0');
 const Error = require('@cardstack/plugin-utils/error');
 const compose = require('koa-compose');
 const route = require('koa-better-route');

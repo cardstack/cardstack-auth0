@@ -4,7 +4,7 @@ const { declareInjections } = require('@cardstack/di');
 const sourceName = "auth0";
 
 const template = Handlebars.compile(`
-define("cardstack-auth0/environment", ["exports"], function (exports) {
+define("@cardstack/auth0/environment", ["exports"], function (exports) {
   "use strict";
   Object.defineProperty(exports, "__esModule", {
     value: true

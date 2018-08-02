@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@cardstack/authentication@^0.9.4":
-  version "0.9.4"
-  resolved "https://registry.yarnpkg.com/@cardstack/authentication/-/authentication-0.9.4.tgz#7e4ab170cd476332d1de48921bb71c6232d3dee9"
+"@cardstack/authentication@^0.9.8":
+  version "0.9.8"
+  resolved "https://registry.yarnpkg.com/@cardstack/authentication/-/authentication-0.9.8.tgz#b169096185de52b6e574a348e47638b5552f481a"
   dependencies:
     "@cardstack/di" "0.8.0"
     "@cardstack/logger" "^0.1.0"
@@ -19,9 +19,9 @@
     koa-compose "^3.2.1"
     koa-json-body "^5.3.0"
 
-"@cardstack/codegen@0.9.4":
-  version "0.9.4"
-  resolved "https://registry.yarnpkg.com/@cardstack/codegen/-/codegen-0.9.4.tgz#9707a9dd948849c8c1cd625b884738202cca1f32"
+"@cardstack/codegen@0.9.8":
+  version "0.9.8"
+  resolved "https://registry.yarnpkg.com/@cardstack/codegen/-/codegen-0.9.8.tgz#2d90fe5781cf47488776dea151c1f9acfd6d1d42"
   dependencies:
     "@cardstack/di" "0.8.0"
     "@cardstack/plugin-utils" "0.8.0"
@@ -66,18 +66,18 @@
   dependencies:
     handlebars "^4.0.6"
 
-"@cardstack/hub@0.9.4":
-  version "0.9.4"
-  resolved "https://registry.yarnpkg.com/@cardstack/hub/-/hub-0.9.4.tgz#4b3049e74634c865c48cf733420fb1dda308483e"
+"@cardstack/hub@0.9.8":
+  version "0.9.8"
+  resolved "https://registry.yarnpkg.com/@cardstack/hub/-/hub-0.9.8.tgz#2ddf5a2530155768ae68292d56559ae6fd6ed481"
   dependencies:
-    "@cardstack/codegen" "0.9.4"
+    "@cardstack/codegen" "0.9.8"
     "@cardstack/core-types" "0.9.0"
     "@cardstack/di" "0.8.0"
     "@cardstack/handlebars" "0.9.0"
     "@cardstack/logger" "^0.1.0"
-    "@cardstack/pgsearch" "0.9.4"
+    "@cardstack/pgsearch" "0.9.8"
     "@cardstack/plugin-utils" "0.8.0"
-    "@cardstack/queue" "0.9.4"
+    "@cardstack/queue" "0.9.8"
     broccoli-concat "^3.2.2"
     broccoli-plugin "^1.3.0"
     broccoli-source "^1.1.0"
@@ -93,15 +93,16 @@
     lodash "^4.17.4"
     nssocket "^0.6.0"
     path-is-inside "^1.0.2"
+    pg-connection-string "^2.0.0"
     quick-temp "^0.1.8"
     resolve "^1.3.3"
     superagent "^3.8.1"
     tar-fs "^1.16.0"
     tar-stream "^1.5.4"
 
-"@cardstack/jsonapi@^0.9.4":
-  version "0.9.4"
-  resolved "https://registry.yarnpkg.com/@cardstack/jsonapi/-/jsonapi-0.9.4.tgz#2e99c089b535c8c40f32f452fe18ef73b920c28d"
+"@cardstack/jsonapi@^0.9.8":
+  version "0.9.8"
+  resolved "https://registry.yarnpkg.com/@cardstack/jsonapi/-/jsonapi-0.9.8.tgz#801f551dd1497a542f19e0f0550baf21b4b4fb3b"
   dependencies:
     "@cardstack/di" "0.8.0"
     "@cardstack/logger" "^0.1.0"
@@ -116,11 +117,11 @@
   dependencies:
     ms "2.0.0"
 
-"@cardstack/models@^0.9.4":
-  version "0.9.4"
-  resolved "https://registry.yarnpkg.com/@cardstack/models/-/models-0.9.4.tgz#712ee663a52c2e99167ef262cee9775b1a9da53b"
+"@cardstack/models@^0.9.8":
+  version "0.9.8"
+  resolved "https://registry.yarnpkg.com/@cardstack/models/-/models-0.9.8.tgz#0a6f96a1871c84d4aec5e2d3abdd8769998f8565"
   dependencies:
-    "@cardstack/codegen" "0.9.4"
+    "@cardstack/codegen" "0.9.8"
     "@cardstack/di" "0.8.0"
     "@cardstack/plugin-utils" "0.8.0"
     ember-cli-babel "^6.8.2"
@@ -130,12 +131,12 @@
     handlebars "^4.0.6"
     inflection "^1.12.0"
 
-"@cardstack/pgsearch@0.9.4":
-  version "0.9.4"
-  resolved "https://registry.yarnpkg.com/@cardstack/pgsearch/-/pgsearch-0.9.4.tgz#f83a01409d52286daf60ada61033d713d9fcbca9"
+"@cardstack/pgsearch@0.9.8":
+  version "0.9.8"
+  resolved "https://registry.yarnpkg.com/@cardstack/pgsearch/-/pgsearch-0.9.8.tgz#c899360c9b2f54b4a6e94cbad6125f8f99775b69"
   dependencies:
     "@cardstack/di" "^0.8.0"
-    "@cardstack/hub" "0.9.4"
+    "@cardstack/hub" "0.9.8"
     "@cardstack/logger" "^0.1.0"
     "@cardstack/plugin-utils" "0.8.0"
     node-pg-migrate "3.5.0"
@@ -155,24 +156,24 @@
     superagent "^3.8.1"
     symlink-or-copy "^1.1.8"
 
-"@cardstack/queue@0.9.4":
-  version "0.9.4"
-  resolved "https://registry.yarnpkg.com/@cardstack/queue/-/queue-0.9.4.tgz#4ed0187fc1d1c86cf15a6176c7067faa1db017c2"
+"@cardstack/queue@0.9.8":
+  version "0.9.8"
+  resolved "https://registry.yarnpkg.com/@cardstack/queue/-/queue-0.9.8.tgz#f25726a8ed8d58f03a0d3665b69f22e1f8faa658"
   dependencies:
     "@cardstack/di" "0.8.0"
     "@cardstack/logger" "^0.1.0"
     "@cardstack/plugin-utils" "0.8.0"
     pg-boss "^2.5.1"
 
-"@cardstack/test-support@^0.9.4":
-  version "0.9.4"
-  resolved "https://registry.yarnpkg.com/@cardstack/test-support/-/test-support-0.9.4.tgz#cbd5b173e7aed83fce8834d252544584a63f2c8b"
+"@cardstack/test-support@^0.9.8":
+  version "0.9.8"
+  resolved "https://registry.yarnpkg.com/@cardstack/test-support/-/test-support-0.9.8.tgz#1aabeaa1ab4b16468a7506bf1f9bd1e86c5ae79b"
   dependencies:
     "@cardstack/di" "0.8.0"
     "@cardstack/ephemeral" "0.9.2"
-    "@cardstack/hub" "0.9.4"
+    "@cardstack/hub" "0.9.8"
     "@cardstack/logger" "^0.1.0"
-    "@cardstack/pgsearch" "0.9.4"
+    "@cardstack/pgsearch" "0.9.8"
     "@cardstack/plugin-utils" "0.8.0"
     "@std/esm" "^0.25.1"
     chai "^3.5.0"

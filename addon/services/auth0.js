@@ -31,9 +31,9 @@ export default Ember.Service.extend({
 
     let env;
     try {
-      env = window.require('cardstack-auth0/environment');
+      env = window.require('@cardstack/auth0/environment');
     } catch (err) {
-      // running in an env that cardstack-auth0 is not available like prember or fastboot...
+      // running in an env that @cardstack/auth0 is not available like prember or fastboot...
       return;
     }
 

@@ -8,7 +8,7 @@ module.exports = {
   },
 
   included(app) {
-    this._super.included(app);
+    this._super.included.apply(this, arguments);
 
     app.import('node_modules/bowser/bowser.js');
     app.import('vendor/bowser-shim.js', {

@@ -1,8 +1,6 @@
 const Handlebars = require('handlebars');
 const { declareInjections } = require('@cardstack/di');
 
-const sourceName = "auth0";
-
 const template = Handlebars.compile(`
 define("@cardstack/auth0/environment", ["exports"], function (exports) {
   "use strict";
@@ -23,7 +21,7 @@ class Auth0CodeGenerator {
 
   async generateCode() {
     let activeSources = await this.sources.active();
-    let source = activeSources.get(sourceName);
+    let source = Array.from(activeSources.values()).find(s => s.sourceType === '@cardstack/auth0');
     if (!source || !source.authenticator) { return; }
 
     let { clientId,

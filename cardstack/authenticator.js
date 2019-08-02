@@ -29,7 +29,7 @@ module.exports = class {
     this.apiClientSecret = params["api-client-secret"];
     this.dbConnectionName = params["db-connection-name"];
     this.forcePopupBrowserList = params["force-popup-browser-list"];
-
+  
     this.defaultUserTemplate = `{
       "data": {
         "id": "{{#if sub}}{{sub}}{{else}}{{user_id}}{{/if}}",

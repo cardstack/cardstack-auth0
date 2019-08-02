@@ -1,9 +1,10 @@
-import Ember from 'ember';
 import { configure, getConfiguration } from 'torii/configuration';
+
+import Ember from 'ember';
+import bowser from 'bowser';
+import { hubURL } from '@cardstack/plugin-utils/environment';
 import { inject as service } from '@ember/service';
 import { task } from 'ember-concurrency';
-import { hubURL } from '@cardstack/plugin-utils/environment';
-import bowser from 'bowser';
 
 const { get, set } = Ember;
 
@@ -47,10 +48,13 @@ export default Ember.Service.extend({
 
     let opts = {
       'auth0-oauth2': {
+        audience: 'Cardstack-Test-API',
+        responseType: 'code',
         baseUrl: `https://${domain}/authorize`,
         apiKey: clientId,
         scope,
-        redirectUri
+        redirectUri,
+        // state
       }
     };
 
@@ -74,6 +78,7 @@ export default Ember.Service.extend({
     // blockers. So instead in our template we don't render ourself at
     // all until after fetchConfig finishes. Fixing this more nicely
     // would require changes to Torii.
+    
     let { authorizationCode } = yield get(this, 'torii').open('auth0-oauth2', get(this, "popup") || {});
 
     if (authorizationCode) {

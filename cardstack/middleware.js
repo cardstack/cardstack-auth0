@@ -99,7 +99,7 @@ class Auth0Middleware {
               grant_type: "client_credentials",
               client_id: apiClientId,
               client_secret: apiClientSecret,
-              audience: "https://cardstack.auth0.com/api/v2/"
+              audience: "https://cpurtlebaugh.auth0.com/api/v2/"
             },
             json: true,
           };

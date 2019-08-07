@@ -16,7 +16,6 @@ class Auth0CodeGenerator {
   async generateModules() {
     let activeSources = await this.sources.active();
     let source = Array.from(activeSources.values()).find(s => s.sourceType === '@cardstack/auth0');
-    log.info("SOURCE AUTHENTICATOR: ", source)
     if (!source || !source.authenticator) { return; }
 
     let { clientId,

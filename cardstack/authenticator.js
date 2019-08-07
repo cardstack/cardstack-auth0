@@ -1,7 +1,7 @@
 const Error = require('@cardstack/plugin-utils/error');
 const request = require('request-promise');
 const jwt = require('jsonwebtoken');
-
+const log = require('@cardstack/logger')('authenticator')
 function cleanupNamespacedProps(obj) {
   let result = {};
   Object.keys(obj).forEach(key => {
@@ -9,6 +9,7 @@ function cleanupNamespacedProps(obj) {
     result[cleanKey] = obj[key];
   });
 
+  log.info("result: ", result.nickname)
   return result;
 }
 
@@ -56,6 +57,7 @@ module.exports = class {
   }
 
   async authenticate(payload /*, userSearcher */) {
+    log.info("payload", payload)
     if (!payload.authorizationCode) {
       throw new Error("missing required field 'authorizationCode'", {
         status: 400
@@ -76,6 +78,7 @@ module.exports = class {
     });
 
     let { body } = response;
+    log.info("res access token: ", body.access_token)
     if (response.statusCode !== 200) {
       throw new Error(body.error, {
         status: response.statusCode,
@@ -85,6 +88,7 @@ module.exports = class {
 
     let user =  jwt.decode(body.id_token);
     user = cleanupNamespacedProps(user);
+    log.info("user : ", user.name)
     return user;
   }
 

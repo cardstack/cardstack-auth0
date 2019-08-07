@@ -23,6 +23,7 @@ module.exports = [
           'popup': { height: 700, width: 500 },
           'api-client-id': process.env.AUTH0_API_CLIENT_ID,
           'api-client-secret': process.env.AUTH0_API_CLIENT_SECRET,
+          'db-connection-name': 'Username-Password-Authentication',
           'substitute-gravatar-default': 'https://cardstack.com/assets/images/default-avatar.png'
         }
         // include this if you want the login to appear as an iframe (this generally doesn't work with 3rd party auth sources like google or facebook as those hosts use X-Frame-Options set to sameorigin.

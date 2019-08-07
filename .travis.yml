@@ -10,6 +10,9 @@ cache:
 
 env:
   global:
+    - PGHOST=localhost
+    - PGPORT=5432
+    - PGUSER=postgres
   # See https://git.io/vdao3 for details.
   - JOBS=1
   # we recommend new addons test the current and previous LTS
@@ -29,7 +32,7 @@ matrix:
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash
   - export PATH=$HOME/.yarn/bin:$PATH
-  - docker run -d --rm --name postgres cardstack/pg-test
+  - docker run -d --rm -p 5432:5432 --name postgres cardstack/pg-test
   
 install:
   # - yarn install --no-lockfile --non-interactive

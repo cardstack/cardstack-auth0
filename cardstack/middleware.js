@@ -88,7 +88,7 @@ class Auth0Middleware {
       async (ctxt) => {
         addCorsHeaders(ctxt.response);
         await withJsonErrorHandling(ctxt, async () => {
-          let { clientId, apiClientId, apiClientSecret, domain } = await this._locateAuthenticationSource();
+          let { clientId, apiClientId, apiClientSecret, domain, audience } = await this._locateAuthenticationSource();
 
           let id = ctxt.routeParams.id;
 
@@ -99,7 +99,7 @@ class Auth0Middleware {
               grant_type: "client_credentials",
               client_id: apiClientId,
               client_secret: apiClientSecret,
-              audience: "https://cardstack.auth0.com/api/v2/"
+              audience
             },
             json: true,
           };

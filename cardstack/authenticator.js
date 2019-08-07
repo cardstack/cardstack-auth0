@@ -1,6 +1,7 @@
 const Error = require('@cardstack/plugin-utils/error');
 const request = require('request-promise');
 const jwt = require('jsonwebtoken');
+const log = require('@cardstack/logger')('authenticator')
 
 function cleanupNamespacedProps(obj) {
   let result = {};
@@ -29,7 +30,6 @@ module.exports = class {
     this.apiClientSecret = params["api-client-secret"];
     this.dbConnectionName = params["db-connection-name"];
     this.forcePopupBrowserList = params["force-popup-browser-list"];
-
     this.defaultUserTemplate = `{
       "data": {
         "id": "{{#if sub}}{{sub}}{{else}}{{user_id}}{{/if}}",
@@ -87,5 +87,4 @@ module.exports = class {
     user = cleanupNamespacedProps(user);
     return user;
   }
-
 };

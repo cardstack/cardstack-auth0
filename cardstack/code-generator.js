@@ -2,15 +2,10 @@ const Handlebars = require('handlebars');
 const { declareInjections } = require('@cardstack/di');
 
 const template = Handlebars.compile(`
-define("@cardstack/auth0/environment", ["exports"], function (exports) {
-  "use strict";
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
   {{#each properties as |property|}}
-    exports.{{property.name}} = "{{property.value}}";
+    export const {{property.name}} = "{{property.value}}";
   {{/each}}
-});
+
 `);
 
 module.exports = declareInjections({
@@ -18,8 +13,7 @@ module.exports = declareInjections({
 },
 
 class Auth0CodeGenerator {
-
-  async generateCode() {
+  async generateModules() {
     let activeSources = await this.sources.active();
     let source = Array.from(activeSources.values()).find(s => s.sourceType === '@cardstack/auth0');
     if (!source || !source.authenticator) { return; }
@@ -32,8 +26,7 @@ class Auth0CodeGenerator {
           popup,
           forcePopupBrowserList
     } = source.authenticator;
-
-    return template({ properties: [{
+    let properties = [{
       name: 'clientId',
       value: clientId,
     },{
@@ -57,6 +50,9 @@ class Auth0CodeGenerator {
     },{
       name: 'forcePopupBrowserList',
       value: (forcePopupBrowserList || []).join(',')
-    }]});
+    }];
+
+    let compiled = template({ properties });
+    return new Map([['environment', compiled]]);
   }
 });

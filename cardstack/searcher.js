@@ -10,18 +10,19 @@ module.exports = class Auth0Searcher {
     this.domain = domain;
     this.clientId = opts["api-client-id"];
     this.clientSecret = opts["api-client-secret"];
+    this.audience = opts["audience"];
     this.gravatarSubstitue = opts['substitute-gravatar-default'];
     this.dataSource = dataSource;
   }
 
-  async get(session, branch, type, id, next) {
+  async get(session, type, id, next) {
     if (type === 'auth0-users') {
       return this._getUser(id);
     }
     return next();
   }
 
-  async search(session, branch, query, next) {
+  async search(session, query, next) {
     return next();
   }
 
@@ -34,13 +35,12 @@ module.exports = class Auth0Searcher {
         grant_type: "client_credentials",
         client_id: this.clientId,
         client_secret: this.clientSecret,
-        audience: "https://cardstack.auth0.com/api/v2/"
+        audience: this.audience
       },
       json: true,
     };
 
     let { access_token: accessToken } = await request(apiTokenOptions);
-
     let options = {
       method: "GET",
       uri: `https://${this.domain}/api/v2/users/${encodeURIComponent(login)}`,
@@ -51,12 +51,9 @@ module.exports = class Auth0Searcher {
     };
 
     let response = await request(options);
-
     if (this.gravatarSubstitue && response.picture) {
       response.picture = response.picture.replace(/(^http[s]*:\/\/s\.gravatar\.com\/avatar\/[^\?]+.*\&d=).+$/, '$1' + encodeURIComponent(this.gravatarSubstitue));
     }
     return rewriteExternalUser(response, this.dataSource);
   }
-
-
 };

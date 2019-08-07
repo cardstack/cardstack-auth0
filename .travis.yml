@@ -10,8 +10,11 @@ cache:
 
 env:
   global:
+    - PGHOST=localhost
+    - PGPORT=5432
+    - PGUSER=postgres
   # See https://git.io/vdao3 for details.
-  - JOBS=1
+    - JOBS=1
   # we recommend new addons test the current and previous LTS
   # as well as latest stable release (bonus points to beta/canary)
   # - EMBER_TRY_SCENARIO=ember-lts-2.8
@@ -29,10 +32,12 @@ matrix:
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash
   - export PATH=$HOME/.yarn/bin:$PATH
-
+  - docker run -d --rm -p 5432:5432 --name postgres cardstack/pg-test
+  
 install:
   # - yarn install --no-lockfile --non-interactive
   - yarn install
+
 script:
   # Usually, it's ok to finish the test scenario without reverting
   #  to the addon's original dependency state, skipping "cleanup".

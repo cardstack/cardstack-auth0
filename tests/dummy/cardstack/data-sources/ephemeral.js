@@ -1,6 +1,4 @@
 /* eslint-env node */
-const JSONAPIFactory = require('@cardstack/test-support/jsonapi-factory');
-
 module.exports = [
   {
     type: 'data-sources',

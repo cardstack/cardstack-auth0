@@ -77,24 +77,21 @@ class Updater {
 
   async updateContent(meta, hints, ops) {
     let schema = await this.schema();
-    log.info("meta", meta)
-    log.info("schema", schema)
-    log.info("ops", ops)
+
     if (meta) {
       let { lastSchema } = meta;
       if (isEqual(lastSchema, schema)) {
         return;
       }
     }
-    let test = await ops.beginReplaceAll();
-    // await ops.beginReplaceAll();
-    log.info("replace all", test)
+    await ops.beginReplaceAll();
+    
     for (let model of schema) {
-      log.info("model: ", model)
       await ops.save(model.type, model.id, { data: model });
     }
+    
     await ops.finishReplaceAll();
-    log.info("finish replace all", await ops.finishReplaceAll())
+
     return {
       lastSchema: schema
     };

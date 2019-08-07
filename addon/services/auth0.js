@@ -80,7 +80,6 @@ export default Ember.Service.extend({
     let { authorizationCode } = yield get(this, 'torii').open('auth0-oauth2', get(this, "popup") || {});
    
     if (authorizationCode) {
-      console.log("in login", authorizationCode)
       yield get(this, 'authenticate').perform(authorizationCode);
     }
   }).drop(),
@@ -91,7 +90,6 @@ export default Ember.Service.extend({
     try {
       yield get(this, 'session').authenticate('authenticator:cardstack', get(this, 'source'), { authorizationCode });
     } catch(err) {
-      console.log("err:", err)
       message = err.message;
     }
 

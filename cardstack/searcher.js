@@ -17,19 +17,16 @@ module.exports = class Auth0Searcher {
 
   async get(session, type, id, next) {
     if (type === 'auth0-users') {
-      log.info("in get: ", id)
       return this._getUser(id);
     }
     return next();
   }
 
   async search(session, query, next) {
-    log.info("in search!")
     return next();
   }
 
   async _getUser(login) {
-    log.info("GET USER!!!", login)
     //Auth0 requires a priviledged API token
     let apiTokenOptions = {
       method: "POST",
@@ -44,7 +41,6 @@ module.exports = class Auth0Searcher {
     };
 
     let { access_token: accessToken } = await request(apiTokenOptions);
-    log.info("access token:", accessToken)
     let options = {
       method: "GET",
       uri: `https://${this.domain}/api/v2/users/${encodeURIComponent(login)}`,
@@ -55,12 +51,9 @@ module.exports = class Auth0Searcher {
     };
 
     let response = await request(options);
-    log.info("response in get user: ", response)
     if (this.gravatarSubstitue && response.picture) {
       response.picture = response.picture.replace(/(^http[s]*:\/\/s\.gravatar\.com\/avatar\/[^\?]+.*\&d=).+$/, '$1' + encodeURIComponent(this.gravatarSubstitue));
     }
     return rewriteExternalUser(response, this.dataSource);
   }
-
-
 };

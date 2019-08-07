@@ -41,7 +41,7 @@ class Auth0Middleware {
         await withJsonErrorHandling(ctxt, async () => {
           let email = ctxt.routeParams.email;
           let { clientId, domain, dbConnectionName } = await this._locateAuthenticationSource();
-
+          log.info("this locate authentication source", await this._locateAuthenticationSource)
           // Note that this only makes sense when Auth0 is using the connection type of DB,
           // otherwise the password is managed in a 3rd party system like google
           if (!dbConnectionName) {
@@ -88,7 +88,7 @@ class Auth0Middleware {
       async (ctxt) => {
         addCorsHeaders(ctxt.response);
         await withJsonErrorHandling(ctxt, async () => {
-          let { clientId, apiClientId, apiClientSecret, domain } = await this._locateAuthenticationSource();
+          let { clientId, apiClientId, apiClientSecret, domain, audience } = await this._locateAuthenticationSource();
 
           let id = ctxt.routeParams.id;
 
@@ -99,7 +99,7 @@ class Auth0Middleware {
               grant_type: "client_credentials",
               client_id: apiClientId,
               client_secret: apiClientSecret,
-              audience: "https://cpurtlebaugh.auth0.com/api/v2/"
+              audience
             },
             json: true,
           };

@@ -10,12 +10,14 @@ module.exports = class Auth0Searcher {
     this.domain = domain;
     this.clientId = opts["api-client-id"];
     this.clientSecret = opts["api-client-secret"];
+    this.audience = opts["audience"];
     this.gravatarSubstitue = opts['substitute-gravatar-default'];
     this.dataSource = dataSource;
   }
 
   async get(session, type, id, next) {
     if (type === 'auth0-users') {
+      log.info("in get: ", id)
       return this._getUser(id);
     }
     return next();
@@ -36,7 +38,7 @@ module.exports = class Auth0Searcher {
         grant_type: "client_credentials",
         client_id: this.clientId,
         client_secret: this.clientSecret,
-        audience: "https://cpurtlebaugh.auth0.com/api/v2/"
+        audience: this.audience
       },
       json: true,
     };

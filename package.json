@@ -64,6 +64,7 @@
     "ember-lodash": "^4.17.5", 
     "ember-resolver": "^5.0.1",
     "ember-source": "~3.8.0",
+    "ember-test-helpers": "^0.6.3",
     "eslint": "^5.8.0",
     "eslint-plugin-ember": "^4.6.1", 
     "loader.js": "^4.7.0"

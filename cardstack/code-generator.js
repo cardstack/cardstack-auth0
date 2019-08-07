@@ -1,6 +1,6 @@
 const Handlebars = require('handlebars');
 const { declareInjections } = require('@cardstack/di');
-const log = require('@cardstack/logger')('generate')
+
 const template = Handlebars.compile(`
   {{#each properties as |property|}}
     export const {{property.name}} = "{{property.value}}";

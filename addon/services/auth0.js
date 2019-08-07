@@ -76,9 +76,7 @@ export default Ember.Service.extend({
     // blockers. So instead in our template we don't render ourself at
     // all until after fetchConfig finishes. Fixing this more nicely
     // would require changes to Torii.
-    
     let { authorizationCode } = yield get(this, 'torii').open('auth0-oauth2', get(this, "popup") || {});
-   
     if (authorizationCode) {
       yield get(this, 'authenticate').perform(authorizationCode);
     }

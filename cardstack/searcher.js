@@ -1,6 +1,6 @@
 const request = require('request-promise');
 const { rewriteExternalUser } = require('@cardstack/authentication');
-const log = require('@cardstack/logger')('searcher')
+
 module.exports = class Auth0Searcher {
   static create(...args) {
     return new this(...args);

@@ -54,6 +54,7 @@ module.exports = class Auth0Searcher {
     if (this.gravatarSubstitue && response.picture) {
       response.picture = response.picture.replace(/(^http[s]*:\/\/s\.gravatar\.com\/avatar\/[^\?]+.*\&d=).+$/, '$1' + encodeURIComponent(this.gravatarSubstitue));
     }
-    return rewriteExternalUser(response, this.dataSource);
+    
+    return await this.dataSource.rewriteExternalUser(response);
   }
 };

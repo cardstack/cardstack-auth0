@@ -1,5 +1,4 @@
 const request = require('request-promise');
-const { rewriteExternalUser } = require('@cardstack/authentication');
 
 module.exports = class Auth0Searcher {
   static create(...args) {

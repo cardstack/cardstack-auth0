@@ -30,7 +30,7 @@ module.exports = class Indexer {
 
 class Updater {
 
-  constructor(disabled) {
+  constructor(disabled, patch) {
     this.disabled = disabled;
     this.patch = patch;
   }

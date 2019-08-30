@@ -45,15 +45,23 @@ class Updater {
         },
         relationships: {
           'fields': { data: [
-            { type: 'fields', id: 'name' },
             { type: 'fields', id: 'email' },
-            { type: 'fields', id: 'avatar-url' }
+            { type: 'fields', id: 'avatar-url' },
+            { type: 'fields', id: 'auth0-name' },
+            { type: 'fields', id: 'auth0-id' },
           ] }
         }
       },
       {
         type: 'fields',
-        id: 'name',
+        id: 'auth0-id',
+        attributes: {
+          'field-type': '@cardstack/core-types::string'
+        }
+      },
+      {
+        type: 'fields',
+        id: 'auth0-name',
         attributes: {
           'field-type': '@cardstack/core-types::string'
         }

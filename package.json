@@ -33,6 +33,7 @@
     "ember-concurrency": "^0.10.0",
     "eslint-plugin-node": "^6.0.0",
     "handlebars": "^4.0.6",
+    "jsonpatch": "^3.0.1",
     "jsonwebtoken": "^8.1.0",
     "koa-better-route": "^0.1.0",
     "koa-compose": "^3.2.1",

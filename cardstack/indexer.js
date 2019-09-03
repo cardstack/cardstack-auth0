@@ -1,4 +1,5 @@
 const { isEqual } = require('lodash');
+const { apply_patch } = require('jsonpatch');
 const log = require('@cardstack/logger')('cardstack/auth0-auth/indexer');
 
 module.exports = class Indexer {
@@ -7,7 +8,8 @@ module.exports = class Indexer {
     return new this(...args);
   }
 
-  constructor({ dataSource, provideUserSchema }) {
+  constructor({ dataSource, provideUserSchema, patch }) {
+    this.patch = patch || Object.create(null);
     if (provideUserSchema === false) {
       this.disabled = true;
     } else {
@@ -22,14 +24,15 @@ module.exports = class Indexer {
   }
 
   async beginUpdate() {
-    return new Updater(this.disabled);
+    return new Updater(this.disabled, this.patch);
   }
 };
 
 class Updater {
 
-  constructor(disabled) {
+  constructor(disabled, patch) {
     this.disabled = disabled;
+    this.patch = patch;
   }
 
   async schema() {
@@ -37,7 +40,7 @@ class Updater {
       return [];
     }
 
-    return [
+    let schema = [
       {
         type: 'content-types',
         id: 'auth0-users',
@@ -81,6 +84,7 @@ class Updater {
         }
       },
     ];
+    return schema.map(doc => this._maybePatch(doc));
   }
 
   async updateContent(meta, hints, ops) {
@@ -99,5 +103,18 @@ class Updater {
     return {
       lastSchema: schema
     };
+  }
+
+
+  _maybePatch(doc) {
+    log.info("doc in maybe patch: ", doc)
+    let typePatches = this.patch[doc.type];
+    if (typePatches) {
+      let modelPatches = typePatches[doc.id];
+      if (modelPatches) {
+        doc = apply_patch(doc, modelPatches);
+      }
+    }
+    return doc;
   }
 }

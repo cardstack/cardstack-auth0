@@ -104,6 +104,7 @@ module.exports = class {
     }
 
     let user =  jwt.decode(body.id_token);
+    user.refreshToken = body.refresh_token;
     user = cleanupNamespacedProps(user);
     return user;
   }

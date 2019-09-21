@@ -56,26 +56,46 @@ module.exports = class {
   }
 
   async authenticate(payload /*, userSearcher */) {
-    if (!payload.authorizationCode) {
-      throw new Error("missing required field 'authorizationCode'", {
+    log.info("payload", payload)
+    if (!payload.authorizationCode && !payload.refreshToken) {
+      throw new Error("missing required field 'authorizationCode' or 'refreshToken'", {
         status: 400
       });
     }
+
+    if (payload.authorizationCode && payload.refreshToken) {
+      throw new Error("only 'authorizationCode' or 'refreshToken' is allowed", {
+        status: 400
+      });
+    }
+
+    let requestBody = {
+      "client_id": this.clientId,
+      "client_secret": this.clientSecret,
+    }
+
+    if(payload.authorizationCode){
+      requestBody['grant_type'] = 'authorization_code';
+      requestBody['code'] = payload.authorizationCode;
+      requestBody['redirect_uri'] = this.appUrl;
+    }
+
+    if(payload.refreshToken){
+      requestBody['grant_type'] = 'refresh_token';
+      requestBody['refresh_token'] = payload.refreshToken;
+    }
+
+    log.info('requestBody:', requestBody);
     let response = await request({
       method: "POST",
       uri: `https://${this.domain}/oauth/token`,
-      body: {
-        "grant_type": "authorization_code",
-        "client_id": this.clientId,
-        "client_secret": this.clientSecret,
-        "code": payload.authorizationCode,
-        "redirect_uri": this.appUrl
-      },
+      body: requestBody,
       json: true,
       resolveWithFullResponse: true
     });
 
     let { body } = response;
+    log.info("body:", body);
     if (response.statusCode !== 200) {
       throw new Error(body.error, {
         status: response.statusCode,

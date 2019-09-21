@@ -88,6 +88,7 @@ class Updater {
   }
 
   async updateContent(meta, hints, ops) {
+    log.info("meta:", meta)
     let schema = await this.schema();
     if (meta) {
       let { lastSchema } = meta;
@@ -107,7 +108,6 @@ class Updater {
 
 
   _maybePatch(doc) {
-    log.info("doc in maybe patch: ", doc)
     let typePatches = this.patch[doc.type];
     if (typePatches) {
       let modelPatches = typePatches[doc.id];

@@ -88,7 +88,6 @@ class Updater {
   }
 
   async updateContent(meta, hints, ops) {
-    log.info("meta:", meta)
     let schema = await this.schema();
     if (meta) {
       let { lastSchema } = meta;

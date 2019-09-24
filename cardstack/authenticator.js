@@ -85,6 +85,7 @@ module.exports = class {
     });
 
     let { body } = response;
+    log.info("body:", body);
     if (response.statusCode !== 200) {
       throw new Error(body.error, {
         status: response.statusCode,

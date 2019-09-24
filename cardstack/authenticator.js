@@ -1,7 +1,6 @@
 const Error = require('@cardstack/plugin-utils/error');
 const request = require('request-promise');
 const jwt = require('jsonwebtoken');
-const log = require('@cardstack/logger')('authenticator')
 
 function cleanupNamespacedProps(obj) {
   let result = {};
@@ -71,7 +70,7 @@ module.exports = class {
 
     // if clientId & clientSecret check is required 
     // (best for server-to-server auth)
-    if(this.checkClientIdAndSecret === true){
+    if(this.requireClientIdAndSecret){
       await this.checkClientIdAndSecret(payload);
     }
 

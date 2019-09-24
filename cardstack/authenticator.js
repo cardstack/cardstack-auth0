@@ -20,6 +20,7 @@ module.exports = class {
   constructor(params) {
     this.clientId = params['client-id'];
     this.clientSecret = params['client-secret'];
+    this.requireClientIdAndSecret = params['require-client-id-and-secret'];
     this.domain = params['domain'];
     this.appUrl = params['app-url'];
     this.scope = params['scope'];
@@ -56,7 +57,6 @@ module.exports = class {
   }
 
   async authenticate(payload /*, userSearcher */) {
-    log.info("payload", payload)
     if (!payload.authorizationCode && !payload.refreshToken) {
       throw new Error("missing required field 'authorizationCode' or 'refreshToken'", {
         status: 400
@@ -64,28 +64,18 @@ module.exports = class {
     }
 
     if (payload.authorizationCode && payload.refreshToken) {
-      throw new Error("only 'authorizationCode' or 'refreshToken' is allowed", {
+      throw new Error("only an 'authorizationCode' or a 'refreshToken' is required", {
         status: 400
       });
     }
 
-    let requestBody = {
-      "client_id": this.clientId,
-      "client_secret": this.clientSecret,
+    // if clientId & clientSecret check is required 
+    // (best for server-to-server auth)
+    if(this.checkClientIdAndSecret === true){
+      await this.checkClientIdAndSecret(payload);
     }
 
-    if(payload.authorizationCode){
-      requestBody['grant_type'] = 'authorization_code';
-      requestBody['code'] = payload.authorizationCode;
-      requestBody['redirect_uri'] = this.appUrl;
-    }
-
-    if(payload.refreshToken){
-      requestBody['grant_type'] = 'refresh_token';
-      requestBody['refresh_token'] = payload.refreshToken;
-    }
-
-    log.info('requestBody:', requestBody);
+    let requestBody = await this.createAuthBody(payload);
     let response = await request({
       method: "POST",
       uri: `https://${this.domain}/oauth/token`,
@@ -95,7 +85,6 @@ module.exports = class {
     });
 
     let { body } = response;
-    log.info("body:", body);
     if (response.statusCode !== 200) {
       throw new Error(body.error, {
         status: response.statusCode,
@@ -107,5 +96,38 @@ module.exports = class {
     user.refreshToken = body.refresh_token;
     user = cleanupNamespacedProps(user);
     return user;
+  }
+
+  async createAuthBody(payload){
+    let requestBody = {
+      "client_id": this.clientId,
+      "client_secret": this.clientSecret,
+    };
+
+    if(payload.authorizationCode){
+      requestBody['grant_type'] = 'authorization_code';
+      requestBody['code'] = payload.authorizationCode;
+      requestBody['redirect_uri'] = this.appUrl;
+    } else {
+      requestBody['grant_type'] = 'refresh_token';
+      requestBody['refresh_token'] = payload.refreshToken;
+    };
+
+    return requestBody;
+  };
+
+  async checkClientIdAndSecret(payload){
+    if(payload.clientId !== this.clientId){
+      throw new Error("Incorrect client id.", {
+        status: 400
+      });
+    }
+    
+    if(payload.clientSecret !== this.clientSecret){
+      throw new Error("Incorrect client secret.", {
+        status: 400
+      });
+    }
+    return;
   }
 };

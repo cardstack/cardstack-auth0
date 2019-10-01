@@ -1,3 +1,4 @@
+import { find } from '@ember/test-helpers';
 import { moduleForComponent, skip } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
@@ -12,7 +13,7 @@ skip('it renders', function(assert) {
 
   this.render(hbs`{{auth0-login}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  assert.equal(find('*').textContent.trim(), '');
 
   // Template block usage:
   this.render(hbs`
@@ -21,5 +22,5 @@ skip('it renders', function(assert) {
     {{/auth0-login}}
   `);
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(find('*').textContent.trim(), 'template block text');
 });

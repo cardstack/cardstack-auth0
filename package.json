@@ -47,7 +47,6 @@
     "@cardstack/jsonapi": "0.14.24-alpha.0",
     "@cardstack/models": "0.14.24-alpha.0",
     "@cardstack/test-support": "0.14.24-alpha.0",
-    "@ember/jquery": "^0.5.2",
     "broccoli-asset-rev": "^2.7.0",
     "ember-cli": "~3.5.0",
     "ember-cli-dependency-checker": "^3.0.0",

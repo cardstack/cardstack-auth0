@@ -106,7 +106,9 @@ module.exports = class {
     if(payload.authorizationCode){
       requestBody['grant_type'] = 'authorization_code';
       requestBody['code'] = payload.authorizationCode;
-      requestBody['redirect_uri'] = this.appUrl;
+      log.info('payload', payload)
+      log.info("payload redirect", !payload.redirectUrl);
+      (!payload.redirectUrl) ? requestBody['redirect_uri'] = this.appUrl : requestBody['redirect_uri'] = payload.redirectUrl;
     } else {
       requestBody['grant_type'] = 'refresh_token';
       requestBody['refresh_token'] = payload.refreshToken;

@@ -1,7 +1,7 @@
 const Error = require('@cardstack/plugin-utils/error');
 const request = require('request-promise');
 const jwt = require('jsonwebtoken');
-const log = require('@cardstack/logger');
+const log = require('@cardstack/logger')('@cardstack/auth0');
 
 function cleanupNamespacedProps(obj) {
   let result = {};

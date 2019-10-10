@@ -107,7 +107,6 @@ class Updater {
 
 
   _maybePatch(doc) {
-    log.info("doc in maybe patch: ", doc)
     let typePatches = this.patch[doc.type];
     if (typePatches) {
       let modelPatches = typePatches[doc.id];

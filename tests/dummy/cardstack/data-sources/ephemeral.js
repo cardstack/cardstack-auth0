@@ -13,6 +13,7 @@ module.exports = [
     attributes: {
         'source-type': '@cardstack/auth0',
         params: {
+          'require-client-id-and-secret': false,
           'client-id': process.env.AUTH0_CLIENT_ID,
           'client-secret': process.env.AUTH0_CLIENT_SECRET,
           'domain': process.env.AUTH0_DOMAIN,

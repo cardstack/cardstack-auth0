@@ -1,7 +1,7 @@
 const Error = require('@cardstack/plugin-utils/error');
 const request = require('request-promise');
 const jwt = require('jsonwebtoken');
-const log = require('@cardstack/logger')('authenticator')
+const log = require('@cardstack/logger')('@cardstack/auth0');
 
 function cleanupNamespacedProps(obj) {
   let result = {};
@@ -20,6 +20,7 @@ module.exports = class {
   constructor(params) {
     this.clientId = params['client-id'];
     this.clientSecret = params['client-secret'];
+    this.requireClientIdAndSecret = params['require-client-id-and-secret'];
     this.domain = params['domain'];
     this.appUrl = params['app-url'];
     this.scope = params['scope'];
@@ -56,35 +57,86 @@ module.exports = class {
   }
 
   async authenticate(payload /*, userSearcher */) {
-    if (!payload.authorizationCode) {
-      throw new Error("missing required field 'authorizationCode'", {
+    try {
+      if (!payload.authorizationCode && !payload.refreshToken) {
+        throw new Error("missing required field 'authorizationCode' or 'refreshToken'", {
+          status: 400
+        });
+      }
+  
+      if (payload.authorizationCode && payload.refreshToken) {
+        throw new Error("only an 'authorizationCode' or a 'refreshToken' is required", {
+          status: 400
+        });
+      }
+  
+      // if clientId & clientSecret check is required 
+      // (best for server-to-server auth)
+      if(this.requireClientIdAndSecret){
+        await this.checkClientIdAndSecret(payload);
+      }
+  
+      let requestBody = await this.createAuthBody(payload);
+      let response = await request({
+        method: "POST",
+        uri: `https://${this.domain}/oauth/token`,
+        body: requestBody,
+        json: true,
+        resolveWithFullResponse: true
+      });
+  
+      let { body } = response;
+      if (response.statusCode !== 200) {
+        throw new Error(body.error, {
+          status: response.statusCode,
+          description: body.error_description
+        });
+      }
+  
+      let user =  jwt.decode(body.id_token);
+      user.refreshToken = body.refresh_token;
+      user = cleanupNamespacedProps(user);
+      return user;
+    } catch(err){
+      throw new Error(err.error, {
+        status: err.statusCode,
+        description: err.error_description
+      });
+    }
+  }
+
+  async createAuthBody(payload){
+    let requestBody = {
+      "client_id": this.clientId,
+      "client_secret": this.clientSecret,
+    };
+
+    if(payload.authorizationCode){
+      requestBody['grant_type'] = 'authorization_code';
+      requestBody['code'] = payload.authorizationCode;
+      log.info('payload', payload)
+      log.info("payload redirect", !payload.redirectUri);
+      (!payload.redirectUri) ? requestBody['redirect_uri'] = this.appUrl : requestBody['redirect_uri'] = payload.redirectUri;
+    } else {
+      requestBody['grant_type'] = 'refresh_token';
+      requestBody['refresh_token'] = payload.refreshToken;
+    };
+
+    return requestBody;
+  };
+
+  async checkClientIdAndSecret(payload){
+    if(payload.clientId !== this.clientId){
+      throw new Error("Incorrect client id.", {
         status: 400
       });
     }
-    let response = await request({
-      method: "POST",
-      uri: `https://${this.domain}/oauth/token`,
-      body: {
-        "grant_type": "authorization_code",
-        "client_id": this.clientId,
-        "client_secret": this.clientSecret,
-        "code": payload.authorizationCode,
-        "redirect_uri": this.appUrl
-      },
-      json: true,
-      resolveWithFullResponse: true
-    });
-
-    let { body } = response;
-    if (response.statusCode !== 200) {
-      throw new Error(body.error, {
-        status: response.statusCode,
-        description: body.error_description
+    
+    if(payload.clientSecret !== this.clientSecret){
+      throw new Error("Incorrect client secret.", {
+        status: 400
       });
     }
-
-    let user =  jwt.decode(body.id_token);
-    user = cleanupNamespacedProps(user);
-    return user;
+    return;
   }
 };

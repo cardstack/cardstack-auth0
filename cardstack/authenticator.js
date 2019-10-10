@@ -57,45 +57,52 @@ module.exports = class {
   }
 
   async authenticate(payload /*, userSearcher */) {
-    if (!payload.authorizationCode && !payload.refreshToken) {
-      throw new Error("missing required field 'authorizationCode' or 'refreshToken'", {
-        status: 400
+    try {
+      if (!payload.authorizationCode && !payload.refreshToken) {
+        throw new Error("missing required field 'authorizationCode' or 'refreshToken'", {
+          status: 400
+        });
+      }
+  
+      if (payload.authorizationCode && payload.refreshToken) {
+        throw new Error("only an 'authorizationCode' or a 'refreshToken' is required", {
+          status: 400
+        });
+      }
+  
+      // if clientId & clientSecret check is required 
+      // (best for server-to-server auth)
+      if(this.requireClientIdAndSecret){
+        await this.checkClientIdAndSecret(payload);
+      }
+  
+      let requestBody = await this.createAuthBody(payload);
+      let response = await request({
+        method: "POST",
+        uri: `https://${this.domain}/oauth/token`,
+        body: requestBody,
+        json: true,
+        resolveWithFullResponse: true
+      });
+  
+      let { body } = response;
+      if (response.statusCode !== 200) {
+        throw new Error(body.error, {
+          status: response.statusCode,
+          description: body.error_description
+        });
+      }
+  
+      let user =  jwt.decode(body.id_token);
+      user.refreshToken = body.refresh_token;
+      user = cleanupNamespacedProps(user);
+      return user;
+    } catch(err){
+      throw new Error(err.error.error, {
+        status: err.statusCode,
+        description: err.error_description
       });
     }
-
-    if (payload.authorizationCode && payload.refreshToken) {
-      throw new Error("only an 'authorizationCode' or a 'refreshToken' is required", {
-        status: 400
-      });
-    }
-
-    // if clientId & clientSecret check is required 
-    // (best for server-to-server auth)
-    if(this.requireClientIdAndSecret){
-      await this.checkClientIdAndSecret(payload);
-    }
-
-    let requestBody = await this.createAuthBody(payload);
-    let response = await request({
-      method: "POST",
-      uri: `https://${this.domain}/oauth/token`,
-      body: requestBody,
-      json: true,
-      resolveWithFullResponse: true
-    });
-
-    let { body } = response;
-    if (response.statusCode !== 200) {
-      throw new Error(body.error, {
-        status: response.statusCode,
-        description: body.error_description
-      });
-    }
-
-    let user =  jwt.decode(body.id_token);
-    user.refreshToken = body.refresh_token;
-    user = cleanupNamespacedProps(user);
-    return user;
   }
 
   async createAuthBody(payload){

@@ -98,7 +98,7 @@ module.exports = class {
       user = cleanupNamespacedProps(user);
       return user;
     } catch(err){
-      throw new Error(err.error.error, {
+      throw new Error(err.error, {
         status: err.statusCode,
         description: err.error_description
       });
